@@ -13,7 +13,8 @@ public class Evento {
     private EstadoEvento estado;
 
 
-    public Evento(int idEvento, String nombre, String ciudad, LocalDateTime fechaHora, Categoria categoria, EstadoEvento estado ) {
+    public Evento(int idEvento, String nombre, String ciudad, LocalDateTime fechaHora,
+                  Categoria categoria, EstadoEvento estado ) {
         this.idEvento = idEvento;
         this.nombre = nombre;
         this.ciudad = ciudad;
@@ -23,11 +24,11 @@ public class Evento {
 
     }
 
-    public int getIdEvento() {
-        return idEvento;
-    }
+    public void publicar(){}
 
-        public String getNombre() {
+    public int getIdEvento() {return idEvento;}
+
+    public String getNombre() {
         return nombre;
     }
 
