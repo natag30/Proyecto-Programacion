@@ -13,4 +13,27 @@ public Administrador(String nombre, int idUsuario, String correo, int telefono,
     this.contraseña = contraseña;
 }
 
+    public int getIdAdministrador() {
+        return idAdministrador;
+    }
+
+    public void setIdAdministrador(int idAdministrador) {
+        this.idAdministrador = idAdministrador;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
 }
