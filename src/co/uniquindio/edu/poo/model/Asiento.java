@@ -1,6 +1,7 @@
 package co.uniquindio.edu.poo.model;
 
 public class Asiento {
+
     private String numero;
     private boolean disponible;
 
@@ -21,3 +22,5 @@ public class Asiento {
         disponible = false;
     }
 }
+
+
