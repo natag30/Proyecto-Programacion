@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.uniquindio.edu.viewController.PrincipalAdminViewController"
+            prefWidth="900" prefHeight="600"
+            style="-fx-background-color: #f8fafc;">
+
+    <top>
+        <HBox style="-fx-background-color: #1e293b; -fx-padding: 12 20 12 20;"
+              alignment="CENTER_LEFT" spacing="16">
+            <Label text="🎫 EventosUQ"
+                   style="-fx-text-fill: white; -fx-font-size: 17px; -fx-font-weight: bold;"/>
+            <Label text="ADMINISTRADOR"
+                   style="-fx-background-color: #1d4ed8;
+                          -fx-text-fill: white;
+                          -fx-font-size: 10px;
+                          -fx-font-weight: bold;
+                          -fx-padding: 3 8 3 8;
+                          -fx-background-radius: 4;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblBienvenida" text="Bienvenido"
+                   style="-fx-text-fill: #cbd5e1; -fx-font-size: 13px;"/>
+            <Button text="Cerrar Sesion" onAction="#onCerrarSesion"
+                    style="-fx-background-color: #dc2626;
+                           -fx-text-fill: white;
+                           -fx-font-weight: bold;
+                           -fx-cursor: hand;
+                           -fx-background-radius: 6;
+                           -fx-padding: 6 14 6 14;"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox style="-fx-background-color: #1e293b; -fx-padding: 16 10 16 10;"
+              spacing="4" prefWidth="200">
+            <Button text="Eventos" prefWidth="180" onAction="#onVerEventos"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: white;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-cursor: hand;
+                           -fx-font-size: 13px;
+                           -fx-padding: 10 14 10 14;
+                           -fx-background-radius: 6;"/>
+            <Button text="Agregar Evento" prefWidth="180" onAction="#onAgregarEvento"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: white;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-cursor: hand;
+                           -fx-font-size: 13px;
+                           -fx-padding: 10 14 10 14;
+                           -fx-background-radius: 6;"/>
+            <Button text="Usuarios" prefWidth="180" onAction="#onVerUsuarios"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: white;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-cursor: hand;
+                           -fx-font-size: 13px;
+                           -fx-padding: 10 14 10 14;
+                           -fx-background-radius: 6;"/>
+            <Button text="Metricas" prefWidth="180" onAction="#onVerMetricas"
+                    style="-fx-background-color: transparent;
+                           -fx-text-fill: white;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-cursor: hand;
+                           -fx-font-size: 13px;
+                           -fx-padding: 10 14 10 14;
+                           -fx-background-radius: 6;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <AnchorPane fx:id="contenidoCentral"
+                    style="-fx-background-color: #f8fafc; -fx-padding: 20;"/>
+    </center>
+</BorderPane>

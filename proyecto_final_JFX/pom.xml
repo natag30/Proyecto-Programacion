@@ -58,7 +58,7 @@
             <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>co.uniquindio.edu.proyecto_final_jfx/co.uniquindio.edu.proyecto_final_jfx.HelloApplication</mainClass>
+              <mainClass>co.uniquindio.edu.proyecto_final_jfx/co.uniquindio.edu.proyecto_final_jfx.Launcher</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

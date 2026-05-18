@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="co.uniquindio.edu.viewController.LoginViewController"
+           style="-fx-background-color: #ffffff;"
+           prefWidth="480" prefHeight="560">
+
+    <VBox alignment="TOP_LEFT" spacing="10"
+          maxWidth="360"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 12;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 20, 0, 0, 4);
+                 -fx-padding: 40;">
+
+        <Label text="EventosUQ"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+
+        <Label text="Inicia sesion en tu cuenta"
+               style="-fx-font-size: 13px; -fx-text-fill: #64748b;"/>
+
+        <Label text="Usuario / Correo"
+               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151; -fx-padding: 8 0 0 0;"/>
+
+        <TextField fx:id="tfUsuario" promptText="Ingresa tu usuario o correo"
+                   prefHeight="38" prefWidth="280"
+                   style="-fx-background-color: #f7f9fc;
+                          -fx-border-color: #d1d9e6;
+                          -fx-border-radius: 6;
+                          -fx-background-radius: 6;
+                          -fx-padding: 8 12 8 12;"/>
+
+        <Label text="Contrasena"
+               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151; -fx-padding: 4 0 0 0;"/>
+
+        <PasswordField fx:id="pfContrasena" promptText="Ingresa tu contrasena"
+                       prefHeight="38" prefWidth="280"
+                       style="-fx-background-color: #f7f9fc;
+                              -fx-border-color: #d1d9e6;
+                              -fx-border-radius: 6;
+                              -fx-background-radius: 6;
+                              -fx-padding: 8 12 8 12;"/>
+
+        <Label text="Rol"
+               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #374151; -fx-padding: 4 0 0 0;"/>
+
+        <ComboBox fx:id="cbRol" prefWidth="280" prefHeight="38"/>
+
+        <Button text="Ingresar" prefWidth="280" prefHeight="40"
+                onAction="#onLogin"
+                style="-fx-background-color: #2563eb;
+                       -fx-text-fill: white;
+                       -fx-font-size: 14px;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 6;
+                       -fx-cursor: hand;"/>
+
+        <Label fx:id="lblError" text=""
+               style="-fx-text-fill: #dc2626; -fx-font-size: 12px;"/>
+
+        <Separator prefWidth="280"/>
+
+        <Label text="Credenciales de prueba:"
+               style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #64748b;"/>
+
+        <Label text="Admin: admin / 1234"
+               style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+
+        <Label text="Usuario: usuario1 / 1234"
+               style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;"/>
+    </VBox>
+</StackPane>

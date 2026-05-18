@@ -1,18 +1,29 @@
 package co.uniquindio.edu.proyecto_final_jfx.model.patrones.creacionales.factory;
 
+import co.uniquindio.edu.proyecto_final_jfx.model.enums.Categoria;
+import co.uniquindio.edu.proyecto_final_jfx.model.evento.Evento;
+import co.uniquindio.edu.proyecto_final_jfx.model.evento.Recinto;
+
+import java.time.LocalDateTime;
+
 public class TeatroFactory extends EventoFactory{
 
-    public Evento crearEvento(String nombre,
-                              String ciudad,
-                              double precioBase) {
-
-        Evento teatro = new Evento();
-
-        teatro.setNombre(nombre);
-        teatro.setCiudad(ciudad);
-        teatro.setPrecioBase(precioBase);
-        teatro.setCategoria("Teatro");
-
-        return teatro;
+    /**
+     * Crea y retorna un evento de teatro con el nombre, recinto y fecha dados.
+     *
+     * @param nombre  nombre de la obra de teatro
+     * @param recinto lugar donde se realiza el evento
+     * @param fecha   fecha y hora del evento
+     * @return nuevo evento con categoría TEATRO
+     */
+    @Override
+    public Evento crearEvento(String nombre, Recinto recinto, LocalDateTime fecha) {
+        return new Evento(
+                nombre,
+                Categoria.TEATRO,
+                recinto.getCiudad(),
+                fecha,
+                recinto
+        );
     }
 }
