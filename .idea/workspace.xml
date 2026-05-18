@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1e402d9-d12a-40eb-b1da-65987be15b19" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/PSE.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/TarjetaCredito.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Proyecto-Programacion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Proyecto-Programacion.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/compra/Compra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Compra.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/IMetodoPago.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/IMetodoPago.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/PSEAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/PSEAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/TarjetaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/TarjetaAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/usuario/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/uniquindio/edu/proyecto_final_jfx/model/usuario/Administrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/ConciertoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/ConciertoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/ConferenciaFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/ConferenciaFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/EventoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/EventoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/TeatroFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/TeatroFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/singleton/PlataformaEventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/singleton/PlataformaEventos.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="32" />
+    <option name="cachedIndexableFilesCount" value="70" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -33,6 +28,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Diana" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -44,7 +44,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/natag30/Proyecto-Programacion.git&quot;,
-    &quot;accountId&quot;: &quot;f8272a16-f1a7-429b-a4c9-6c34987fcfc5&quot;
+    &quot;accountId&quot;: &quot;e2381778-f556-4a95-a52f-34216bdc0b5e&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -135,7 +135,7 @@
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;com.intellij.ide.FileNotInSourceRootChecker.no.check&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Diana&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
@@ -177,6 +177,10 @@
       <workItem from="1778983849427" duration="811000" />
       <workItem from="1778984725089" duration="258000" />
       <workItem from="1778985016065" duration="7653000" />
+      <workItem from="1779073269422" duration="84000" />
+      <workItem from="1779073385820" duration="196000" />
+      <workItem from="1779073610864" duration="72000" />
+      <workItem from="1779073769104" duration="1981000" />
     </task>
     <servers />
   </component>
