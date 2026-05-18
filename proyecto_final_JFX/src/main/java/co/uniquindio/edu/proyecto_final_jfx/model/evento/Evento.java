@@ -1,4 +1,7 @@
-package co.uniquindio.edu.poo.model;
+package co.uniquindio.edu.proyecto_final_jfx.model.evento;
+
+import co.uniquindio.edu.proyecto_final_jfx.model.enums.Categoria;
+import co.uniquindio.edu.proyecto_final_jfx.model.enums.EstadoEvento;
 
 import java.time.LocalDateTime;
 

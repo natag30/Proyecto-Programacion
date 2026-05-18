@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f1e402d9-d12a-40eb-b1da-65987be15b19" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/PSE.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/TarjetaCredito.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Proyecto-Programacion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Proyecto-Programacion.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/compra/Compra.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Compra.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/IMetodoPago.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/IMetodoPago.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/PSEAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/PSEAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/TarjetaAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/estructurales/adapter/TarjetaAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/usuario/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/co/uniquindio/edu/proyecto_final_jfx/model/usuario/Administrador.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="32" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;diegorincona-rgb&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/natag30/Proyecto-Programacion.git&quot;,
+    &quot;accountId&quot;: &quot;f8272a16-f1a7-429b-a4c9-6c34987fcfc5&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Compra.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="2.5720879157165728E-126" />
+      <entry key="MS500" value="7.621793213918256E-26" />
+      <entry key="S2" value="5.254293079571687E-7" />
+      <entry key="S5" value="0.0030796081982139424" />
+      <entry key="S10" value="0.05761350907664308" />
+      <entry key="S30" value="0.7195354917845489" />
+      <entry key="S60" value="2.260816740714852" />
+      <entry key="M2" value="5.851858943482466" />
+      <entry key="M5" value="16.936162884876946" />
+      <entry key="M10" value="31.32439915637219" />
+      <entry key="M15" value="41.74768099905377" />
+      <entry key="M30" value="62.107657560143494" />
+      <entry key="H1" value="82.33464706748408" />
+      <entry key="H2" value="98.01526910987572" />
+      <entry key="H4" value="108.04395290495796" />
+      <entry key="D1" value="117.85498996904681" />
+      <entry key="W1" value="119.68956918895965" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0000000000005176" />
+      <entry key="S30" value="1.00009016539741" />
+      <entry key="S60" value="1.0138132045001547" />
+      <entry key="M2" value="1.2269927101305518" />
+      <entry key="M5" value="2.572059534959136" />
+      <entry key="M10" value="4.404353114991109" />
+      <entry key="M15" value="5.725788543532665" />
+      <entry key="M30" value="8.618641373191647" />
+      <entry key="H1" value="11.968112103204" />
+      <entry key="H2" value="14.800626821687233" />
+      <entry key="H4" value="16.688898946175293" />
+      <entry key="D1" value="18.581177775942788" />
+      <entry key="W1" value="18.939281968666972" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="3.937699051802531E-9" />
+      <entry key="MS500" value="0.020847237026215135" />
+      <entry key="S2" value="0.3799814432828461" />
+      <entry key="S5" value="0.6812649664429488" />
+      <entry key="S10" value="0.873056525347735" />
+      <entry key="S30" value="1.632892502083244" />
+      <entry key="S60" value="3.2171235041846886" />
+      <entry key="M2" value="7.027015309767361" />
+      <entry key="M5" value="19.440193738984654" />
+      <entry key="M10" value="35.658367251122066" />
+      <entry key="M15" value="47.40827643027127" />
+      <entry key="M30" value="70.67513987384146" />
+      <entry key="H1" value="94.26751545633033" />
+      <entry key="H2" value="112.79442003241842" />
+      <entry key="H4" value="124.72086375427016" />
+      <entry key="D1" value="136.43396414919368" />
+      <entry key="W1" value="138.62853084284174" />
+    </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="3AST5288DH7Ldu68Cdmv211yxxi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ide.FileNotInSourceRootChecker.no.check&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/U/SEGUNDO SEMESTRE/Programación II/RepositorioProyecto/Proyecto-Programacion&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.24374.151" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.24374.151" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f1e402d9-d12a-40eb-b1da-65987be15b19" name="Changes" comment="" />
+      <created>1772584784814</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1772584784814</updated>
+      <workItem from="1772584786058" duration="86000" />
+      <workItem from="1778807504613" duration="1381000" />
+      <workItem from="1778879656147" duration="121000" />
+      <workItem from="1778887051378" duration="37000" />
+      <workItem from="1778983218873" duration="217000" />
+      <workItem from="1778983458164" duration="170000" />
+      <workItem from="1778983849427" duration="811000" />
+      <workItem from="1778984725089" duration="258000" />
+      <workItem from="1778985016065" duration="7653000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
