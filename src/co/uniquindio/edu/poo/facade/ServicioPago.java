@@ -1,5 +1,7 @@
 package co.uniquindio.edu.poo.facade;
 
+import co.uniquindio.edu.poo.model.Pago;
+
 public class ServicioPago {
 
     public boolean procesarPago(Pago pago){
