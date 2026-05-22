@@ -30,7 +30,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PrincipalUsuarioViewController {
 
@@ -166,10 +168,10 @@ public class PrincipalUsuarioViewController {
         Label titulo = new Label("Comprar Entrada");
         titulo.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
 
-        // Estilos para botones del mapa de asientos
-        final String estiloDisponible   = "-fx-background-color: #bbf7d0; -fx-text-fill: #14532d; -fx-background-radius: 6; -fx-font-size: 11px; -fx-cursor: hand;";
-        final String estiloSeleccionado = "-fx-background-color: #2563eb; -fx-text-fill: white;   -fx-background-radius: 6; -fx-font-size: 11px; -fx-font-weight: bold; -fx-cursor: hand;";
-        final String estiloOcupado      = "-fx-background-color: #fca5a5; -fx-text-fill: #7f1d1d; -fx-background-radius: 6; -fx-font-size: 11px;";
+        // Estilos reutilizables para el mapa de asientos
+        final String ESTILO_DISPONIBLE   = "-fx-background-color: #bbf7d0; -fx-text-fill: #14532d; -fx-background-radius: 6; -fx-font-size: 11px; -fx-cursor: hand;";
+        final String ESTILO_SELECCIONADO = "-fx-background-color: #2563eb; -fx-text-fill: white; -fx-background-radius: 6; -fx-font-size: 11px; -fx-font-weight: bold; -fx-cursor: hand;";
+        final String ESTILO_OCUPADO      = "-fx-background-color: #fca5a5; -fx-text-fill: #7f1d1d; -fx-background-radius: 6; -fx-font-size: 11px;";
 
         // ComboBox de evento
         ComboBox<Evento> cbEvento = new ComboBox<>();
@@ -206,9 +208,10 @@ public class PrincipalUsuarioViewController {
             }
         });
 
-        // Estado de selección de asiento
-        final Asiento[] asientoSeleccionado = {null};
-        final Button[]  botonSeleccionado   = {null};
+        // Estado de selección múltiple de asientos
+        final List<Asiento>          asientosSeleccionados = new ArrayList<>();
+        final Map<Asiento, Button>   botonesSeleccionados  = new HashMap<>();
+
         Label lblAsientoInfo = new Label();
         lblAsientoInfo.setStyle("-fx-font-size: 11px; -fx-text-fill: #1d4ed8; -fx-font-weight: bold;");
 
@@ -236,14 +239,14 @@ public class PrincipalUsuarioViewController {
         mapaAsientos.setVisible(false);
         mapaAsientos.setManaged(false);
 
-        // Al cambiar evento: limpiar zona, mapa y selección
+        // Al cambiar evento: limpiar zona, selección y mapa
         cbEvento.setOnAction(e -> {
             Evento ev = cbEvento.getValue();
             cbZona.getItems().clear();
             if (ev != null) cbZona.getItems().addAll(ev.getRecinto().getZonas());
             mapaAsientos.getChildren().clear();
-            asientoSeleccionado[0] = null;
-            botonSeleccionado[0]   = null;
+            asientosSeleccionados.clear();
+            botonesSeleccionados.clear();
             lblAsientoInfo.setText("");
             lblMapaTitulo.setVisible(false);
             lblMapaTitulo.setManaged(false);
@@ -267,22 +270,55 @@ public class PrincipalUsuarioViewController {
         lblTotal.setStyle("-fx-font-size: 13px; -fx-font-weight: bold;");
         Label lblMsg = new Label();
 
+        // Spinner de cantidad (se define antes de actualizarTotal para poder capturarlo)
+        Spinner<Integer> spinnerCantidad = new Spinner<>(1, 10, 1);
+        spinnerCantidad.setPrefWidth(80);
+        spinnerCantidad.setEditable(true);
+
+        HBox cantidadBox = new HBox(8);
+        cantidadBox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+        Label lblCantidad = new Label("Cantidad de asientos:");
+        lblCantidad.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #4a5568;");
+        cantidadBox.getChildren().addAll(lblCantidad, spinnerCantidad);
+
+        Label lblCantidadInfo = new Label("Selecciona hasta 1 asiento en el mapa.");
+        lblCantidadInfo.setStyle("-fx-font-size: 11px; -fx-text-fill: #64748b;");
+
+        // Runnable para actualizar el total (usa spinnerCantidad, por eso se define aquí)
         Runnable actualizarTotal = () -> {
             Zona z = cbZona.getValue();
             if (z == null) { lblTotal.setText("Total: $0"); return; }
-            double t = z.getPrecioBase();
-            if (chkVip.isSelected())    t += 50000;
-            if (chkSeguro.isSelected()) t += 15000;
-            if (chkMerch.isSelected())  t += 20000;
-            lblTotal.setText("Total: $" + t);
+            int    cantidad       = spinnerCantidad.getValue();
+            double precioUnitario = z.getPrecioBase();
+            if (chkVip.isSelected())    precioUnitario += 50000;
+            if (chkSeguro.isSelected()) precioUnitario += 15000;
+            if (chkMerch.isSelected())  precioUnitario += 20000;
+            double total = precioUnitario * cantidad;
+            lblTotal.setText("Total: $" + (int) total
+                    + "  (" + cantidad + " x $" + (int) precioUnitario + ")");
         };
 
-        // Al cambiar zona: actualizar total y construir mapa de asientos
+        // Listener del spinner: ajustar info, deseleccionar excedente y recalcular total
+        spinnerCantidad.valueProperty().addListener((obs, oldVal, newVal) -> {
+            lblCantidadInfo.setText("Selecciona hasta " + newVal + " asiento(s) en el mapa.");
+            if (asientosSeleccionados.size() > newVal) {
+                for (Asiento a : asientosSeleccionados) {
+                    Button b = botonesSeleccionados.get(a);
+                    if (b != null) b.setStyle(ESTILO_DISPONIBLE);
+                }
+                asientosSeleccionados.clear();
+                botonesSeleccionados.clear();
+                lblAsientoInfo.setText("");
+            }
+            actualizarTotal.run();
+        });
+
+        // Al cambiar zona: recalcular total, limpiar selección y construir mapa
         cbZona.setOnAction(e -> {
             actualizarTotal.run();
             mapaAsientos.getChildren().clear();
-            asientoSeleccionado[0] = null;
-            botonSeleccionado[0]   = null;
+            asientosSeleccionados.clear();
+            botonesSeleccionados.clear();
             lblAsientoInfo.setText("");
 
             Zona z = cbZona.getValue();
@@ -306,18 +342,37 @@ public class PrincipalUsuarioViewController {
                 btnAsiento.setPrefHeight(36);
 
                 if (!a.isDisponible()) {
-                    btnAsiento.setStyle(estiloOcupado);
+                    btnAsiento.setStyle(ESTILO_OCUPADO);
                     btnAsiento.setDisable(true);
                 } else {
-                    btnAsiento.setStyle(estiloDisponible);
+                    btnAsiento.setStyle(ESTILO_DISPONIBLE);
                     btnAsiento.setOnAction(ev -> {
-                        if (botonSeleccionado[0] != null) {
-                            botonSeleccionado[0].setStyle(estiloDisponible);
+                        if (asientosSeleccionados.contains(a)) {
+                            // Toggle off: deseleccionar y volver a verde
+                            asientosSeleccionados.remove(a);
+                            botonesSeleccionados.remove(a);
+                            btnAsiento.setStyle(ESTILO_DISPONIBLE);
+                        } else {
+                            // Toggle on: agregar si no se alcanzó el límite
+                            if (asientosSeleccionados.size() < spinnerCantidad.getValue()) {
+                                asientosSeleccionados.add(a);
+                                botonesSeleccionados.put(a, btnAsiento);
+                                btnAsiento.setStyle(ESTILO_SELECCIONADO);
+                            } else {
+                                lblAsientoInfo.setText("Ya seleccionaste " + spinnerCantidad.getValue()
+                                        + " asiento(s). Deselecciona uno para cambiar.");
+                                return;
+                            }
                         }
-                        asientoSeleccionado[0] = a;
-                        botonSeleccionado[0]   = btnAsiento;
-                        btnAsiento.setStyle(estiloSeleccionado);
-                        lblAsientoInfo.setText("Asiento seleccionado: " + a.getFila() + a.getNumero());
+                        if (asientosSeleccionados.isEmpty()) {
+                            lblAsientoInfo.setText("");
+                        } else {
+                            StringBuilder sb = new StringBuilder("Seleccionados: ");
+                            for (Asiento sel : asientosSeleccionados) {
+                                sb.append(sel.getFila()).append(sel.getNumero()).append("  ");
+                            }
+                            lblAsientoInfo.setText(sb.toString().trim());
+                        }
                     });
                 }
                 mapaAsientos.getChildren().add(btnAsiento);
@@ -340,9 +395,18 @@ public class PrincipalUsuarioViewController {
             Evento evSel      = cbEvento.getValue();
             Zona   zonaSel    = cbZona.getValue();
             String metodoPago = cbPago.getValue();
+            int    cantidad   = spinnerCantidad.getValue();
 
             if (evSel == null || zonaSel == null || metodoPago == null) {
                 estilo(lblMsg, "Selecciona evento, zona y metodo de pago.", false);
+                return;
+            }
+            if (!zonaSel.getAsientos().isEmpty() && asientosSeleccionados.isEmpty()) {
+                estilo(lblMsg, "Selecciona al menos un asiento en el mapa.", false);
+                return;
+            }
+            if (!zonaSel.getAsientos().isEmpty() && asientosSeleccionados.size() < cantidad) {
+                estilo(lblMsg, "Selecciona exactamente " + cantidad + " asiento(s) en el mapa.", false);
                 return;
             }
             if (!evSel.hayDisponibilidad()) {
@@ -350,62 +414,93 @@ public class PrincipalUsuarioViewController {
                 return;
             }
 
-            // Validar que se seleccione asiento si la zona los tiene
-            if (!zonaSel.getAsientos().isEmpty() && asientoSeleccionado[0] == null) {
-                estilo(lblMsg, "Selecciona un asiento en el mapa.", false);
-                return;
-            }
+            Usuario usuario = usuarioController.getUsuarioActual();
 
-            // Reservar el asiento seleccionado
-            if (asientoSeleccionado[0] != null) {
+            // Reservar todos los asientos de una vez con el Facade
+            if (!asientosSeleccionados.isEmpty()) {
                 ServicioAsiento servicioAsiento = new ServicioAsiento();
-                List<Asiento> aReservar = new ArrayList<>();
-                aReservar.add(asientoSeleccionado[0]);
-                if (!servicioAsiento.reservarAsientos(aReservar)) {
-                    estilo(lblMsg, "El asiento ya no esta disponible.", false);
-                    if (botonSeleccionado[0] != null) {
-                        botonSeleccionado[0].setStyle(estiloOcupado);
-                        botonSeleccionado[0].setDisable(true);
+                boolean reservado = servicioAsiento.reservarAsientos(new ArrayList<>(asientosSeleccionados));
+                if (!reservado) {
+                    estilo(lblMsg, "Uno o mas asientos ya no estan disponibles.", false);
+                    for (Asiento a : asientosSeleccionados) {
+                        Button b = botonesSeleccionados.get(a);
+                        if (b != null) {
+                            b.setStyle(a.isDisponible() ? ESTILO_DISPONIBLE : ESTILO_OCUPADO);
+                            if (!a.isDisponible()) b.setDisable(true);
+                        }
                     }
-                    asientoSeleccionado[0] = null;
-                    botonSeleccionado[0]   = null;
+                    asientosSeleccionados.clear();
+                    botonesSeleccionados.clear();
+                    lblAsientoInfo.setText("");
                     return;
                 }
             }
-
-            Usuario usuario = usuarioController.getUsuarioActual();
-
-            IEntrada entrada = new EntradaBase("Entrada " + zonaSel.getNombre(), zonaSel.getPrecioBase());
-            if (chkVip.isSelected())    entrada = new AccesoVIPDecorator(entrada);
-            if (chkSeguro.isSelected()) entrada = new SeguroCancelacionDecorator(entrada);
-            if (chkMerch.isSelected())  entrada = new MerchandisingDecorator(entrada);
 
             IMetodoPago metodo = "PSE".equals(metodoPago)
                     ? new PSEAdapter(new PSE())
                     : new TarjetaAdapter(new TarjetaCredito());
 
-            Compra compra = compraController.realizarCompra(usuario, evSel, entrada, metodo);
-            if (compra == null) {
-                estilo(lblMsg, "El pago no pudo procesarse.", false);
-                return;
+            int    comprasExitosas = 0;
+            int    ultimoId        = 0;
+            double totalAcumulado  = 0;
+
+            List<Asiento> listaParaIterar = asientosSeleccionados.isEmpty()
+                    ? new ArrayList<>() : new ArrayList<>(asientosSeleccionados);
+
+            if (listaParaIterar.isEmpty()) {
+                // Zona sin mapa: crear 'cantidad' compras genéricas
+                for (int i = 0; i < cantidad; i++) {
+                    IEntrada entrada = new EntradaBase("Entrada " + zonaSel.getNombre(), zonaSel.getPrecioBase());
+                    if (chkVip.isSelected())    entrada = new AccesoVIPDecorator(entrada);
+                    if (chkSeguro.isSelected()) entrada = new SeguroCancelacionDecorator(entrada);
+                    if (chkMerch.isSelected())  entrada = new MerchandisingDecorator(entrada);
+                    Compra compra = compraController.realizarCompra(usuario, evSel, entrada, metodo);
+                    if (compra != null) {
+                        comprasExitosas++;
+                        ultimoId       = compra.getIdCompra();
+                        totalAcumulado += compra.getTotal();
+                    }
+                }
+            } else {
+                // Zona con mapa: una compra por asiento seleccionado
+                for (Asiento a : listaParaIterar) {
+                    IEntrada entrada = new EntradaBase(
+                            "Entrada " + zonaSel.getNombre() + " " + a.getFila() + a.getNumero(),
+                            zonaSel.getPrecioBase());
+                    if (chkVip.isSelected())    entrada = new AccesoVIPDecorator(entrada);
+                    if (chkSeguro.isSelected()) entrada = new SeguroCancelacionDecorator(entrada);
+                    if (chkMerch.isSelected())  entrada = new MerchandisingDecorator(entrada);
+                    Compra compra = compraController.realizarCompra(usuario, evSel, entrada, metodo);
+                    if (compra != null) {
+                        comprasExitosas++;
+                        ultimoId       = compra.getIdCompra();
+                        totalAcumulado += compra.getTotal();
+                        Button b = botonesSeleccionados.get(a);
+                        if (b != null) {
+                            b.setStyle(ESTILO_OCUPADO);
+                            b.setDisable(true);
+                        }
+                    }
+                }
             }
 
-            // Marcar el asiento ocupado en el mapa tras compra exitosa
-            if (botonSeleccionado[0] != null) {
-                botonSeleccionado[0].setStyle(estiloOcupado);
-                botonSeleccionado[0].setDisable(true);
-            }
-            asientoSeleccionado[0] = null;
-            botonSeleccionado[0]   = null;
+            asientosSeleccionados.clear();
+            botonesSeleccionados.clear();
             lblAsientoInfo.setText("");
 
-            estilo(lblMsg, "Compra realizada! ID: " + compra.getIdCompra()
-                    + "  Total: $" + compra.getTotal(), true);
+            if (comprasExitosas == 0) {
+                estilo(lblMsg, "El pago no pudo procesarse.", false);
+            } else {
+                estilo(lblMsg, comprasExitosas + " entrada(s) compradas."
+                        + "  Ultimo ID: " + ultimoId
+                        + "  Total: $" + (int) totalAcumulado, true);
+            }
         });
 
         contenido.getChildren().addAll(titulo,
                 new Label("Evento:"), cbEvento,
                 new Label("Zona:"), cbZona,
+                cantidadBox, lblCantidadInfo,
                 lblMapaTitulo, leyenda, mapaAsientos, lblAsientoInfo,
                 chkVip, chkSeguro, chkMerch,
                 new Label("Metodo de pago:"), cbPago,

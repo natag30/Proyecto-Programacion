@@ -1,79 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="co.uniquindio.edu.viewController.PrincipalUsuarioViewController"
-            prefWidth="900" prefHeight="600"
-            style="-fx-background-color: #f8fafc;">
+            fx:controller="co.uniquindio.edu.proyecto_final_jfx.viewController.PrincipalUsuarioViewController"
+            prefWidth="950" prefHeight="620"
+            style="-fx-background-color: #f5f5f5;">
 
+    <!-- ── TOP ── -->
     <top>
-        <HBox style="-fx-background-color: #0f4c35; -fx-padding: 12 20 12 20;"
-              alignment="CENTER_LEFT" spacing="16">
-            <Label text="🎫 EventosUQ"
-                   style="-fx-text-fill: white; -fx-font-size: 17px; -fx-font-weight: bold;"/>
+        <HBox prefHeight="48" alignment="CENTER_LEFT" spacing="10"
+              style="-fx-background-color: #ffffff;
+                     -fx-border-color: transparent transparent #e0e0e0 transparent;
+                     -fx-padding: 10 20 10 20;">
+            <Label text="EventosUQ"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold;
+                          -fx-text-fill: #111111; -fx-font-family: Arial;"/>
             <Label text="USUARIO"
-                   style="-fx-background-color: #059669;
-                          -fx-text-fill: white;
-                          -fx-font-size: 10px;
-                          -fx-font-weight: bold;
-                          -fx-padding: 3 8 3 8;
-                          -fx-background-radius: 4;"/>
+                   style="-fx-background-color: #E6F1FB; -fx-text-fill: #0C447C;
+                          -fx-background-radius: 4; -fx-font-size: 11px;
+                          -fx-font-weight: bold; -fx-padding: 3 10 3 10;
+                          -fx-font-family: Arial;"/>
             <Region HBox.hgrow="ALWAYS"/>
             <Label fx:id="lblBienvenida" text="Bienvenido"
-                   style="-fx-text-fill: #a7f3d0; -fx-font-size: 13px;"/>
+                   style="-fx-font-size: 13px; -fx-text-fill: #555555;
+                          -fx-font-family: Arial;"/>
             <Button text="Cerrar Sesion" onAction="#onCerrarSesion"
-                    style="-fx-background-color: #dc2626;
-                           -fx-text-fill: white;
-                           -fx-font-weight: bold;
-                           -fx-cursor: hand;
-                           -fx-background-radius: 6;
-                           -fx-padding: 6 14 6 14;"/>
+                    style="-fx-background-color: #ffffff; -fx-text-fill: #A32D2D;
+                           -fx-border-color: #e0e0e0; -fx-border-radius: 4;
+                           -fx-background-radius: 4; -fx-font-size: 12px;
+                           -fx-padding: 5 12 5 12; -fx-cursor: hand;
+                           -fx-font-family: Arial;"/>
         </HBox>
     </top>
 
+    <!-- ── LEFT SIDEBAR ── -->
     <left>
-        <VBox style="-fx-background-color: #134e35; -fx-padding: 16 10 16 10;"
-              spacing="4" prefWidth="200">
-            <Button text="Explorar Eventos" prefWidth="180" onAction="#onExplorarEventos"
-                    style="-fx-background-color: transparent;
-                           -fx-text-fill: white;
-                           -fx-alignment: CENTER_LEFT;
-                           -fx-cursor: hand;
-                           -fx-font-size: 13px;
-                           -fx-padding: 10 14 10 14;
-                           -fx-background-radius: 6;"/>
-            <Button text="Comprar Entrada" prefWidth="180" onAction="#onComprarEntrada"
-                    style="-fx-background-color: transparent;
-                           -fx-text-fill: white;
-                           -fx-alignment: CENTER_LEFT;
-                           -fx-cursor: hand;
-                           -fx-font-size: 13px;
-                           -fx-padding: 10 14 10 14;
-                           -fx-background-radius: 6;"/>
-            <Button text="Mis Compras" prefWidth="180" onAction="#onMisCompras"
-                    style="-fx-background-color: transparent;
-                           -fx-text-fill: white;
-                           -fx-alignment: CENTER_LEFT;
-                           -fx-cursor: hand;
-                           -fx-font-size: 13px;
-                           -fx-padding: 10 14 10 14;
-                           -fx-background-radius: 6;"/>
-            <Button text="Mi Perfil" prefWidth="180" onAction="#onMiPerfil"
-                    style="-fx-background-color: transparent;
-                           -fx-text-fill: white;
-                           -fx-alignment: CENTER_LEFT;
-                           -fx-cursor: hand;
-                           -fx-font-size: 13px;
-                           -fx-padding: 10 14 10 14;
-                           -fx-background-radius: 6;"/>
+        <VBox prefWidth="160" spacing="2"
+              style="-fx-background-color: #ffffff;
+                     -fx-border-color: transparent #e0e0e0 transparent transparent;
+                     -fx-padding: 14 8 14 8;">
+            <Label text="MI CUENTA"
+                   style="-fx-font-size: 10px; -fx-font-weight: bold;
+                          -fx-text-fill: #888888; -fx-padding: 0 0 0 8;
+                          -fx-font-family: Arial;"/>
+            <Button fx:id="btnExplorar" text="Explorar Eventos"
+                    onAction="#onExplorarEventos" maxWidth="Infinity"
+                    style="-fx-background-color: #E6F1FB; -fx-text-fill: #0C447C;
+                           -fx-font-weight: bold; -fx-alignment: CENTER_LEFT;
+                           -fx-font-size: 13px; -fx-padding: 7 8 7 8;
+                           -fx-background-radius: 6; -fx-cursor: hand;
+                           -fx-font-family: Arial;"/>
+            <Button fx:id="btnComprar" text="Comprar Entradas"
+                    onAction="#onComprarEntradas" maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: #555555;
+                           -fx-alignment: CENTER_LEFT; -fx-font-size: 13px;
+                           -fx-padding: 7 8 7 8; -fx-background-radius: 6;
+                           -fx-cursor: hand; -fx-font-family: Arial;"/>
+            <Button fx:id="btnMisCompras" text="Mis Compras"
+                    onAction="#onMisCompras" maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: #555555;
+                           -fx-alignment: CENTER_LEFT; -fx-font-size: 13px;
+                           -fx-padding: 7 8 7 8; -fx-background-radius: 6;
+                           -fx-cursor: hand; -fx-font-family: Arial;"/>
+            <Button fx:id="btnPerfil" text="Mi Perfil"
+                    onAction="#onMiPerfil" maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: #555555;
+                           -fx-alignment: CENTER_LEFT; -fx-font-size: 13px;
+                           -fx-padding: 7 8 7 8; -fx-background-radius: 6;
+                           -fx-cursor: hand; -fx-font-family: Arial;"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="Cerrar Sesion" onAction="#onCerrarSesion"
+                    maxWidth="Infinity"
+                    style="-fx-background-color: transparent; -fx-text-fill: #A32D2D;
+                           -fx-alignment: CENTER_LEFT; -fx-font-size: 13px;
+                           -fx-padding: 7 8 7 8; -fx-background-radius: 6;
+                           -fx-cursor: hand; -fx-font-family: Arial;"/>
         </VBox>
     </left>
 
+    <!-- ── CENTER ── -->
     <center>
         <AnchorPane fx:id="contenidoCentral"
-                    style="-fx-background-color: #f8fafc; -fx-padding: 20;"/>
+                    style="-fx-background-color: #f5f5f5;"/>
     </center>
 </BorderPane>
