@@ -19,6 +19,9 @@ class EventoTest {
 
     private Evento evento;
 
+    /**
+     * este test se encarga de realizar la confirmacion del recinto del evento
+     */
     @BeforeEach
     void setUp() {
         Recinto recinto = new Recinto("Coliseo", "Calle 1", "Armenia");
@@ -29,18 +32,27 @@ class EventoTest {
                 LocalDateTime.now().plusDays(10), recinto);
     }
 
+    /**
+     * este test se encarga de realizar la publicacion exitosa
+     */
     @Test
     void publicar_exitoso() {
         assertTrue(evento.publicar());
         assertEquals(EstadoEvento.PUBLICADO, evento.getEstado());
     }
 
+    /**
+     * este test se encarga de realizar la publicacion fallida si el evento ya esta publicado
+     */
     @Test
     void publicar_fallaSiYaPublicado() {
         evento.publicar();
         assertFalse(evento.publicar());
     }
 
+    /**
+     * este test se encarga de realizar el pauso exitoso del evento
+     */
     @Test
     void pausar_exitoso() {
         evento.publicar();
@@ -48,6 +60,9 @@ class EventoTest {
         assertEquals(EstadoEvento.PAUSADO, evento.getEstado());
     }
 
+    /**
+     *
+     */
     @Test
     void pausar_fallaSiBorrador() {
         assertFalse(evento.pausar());

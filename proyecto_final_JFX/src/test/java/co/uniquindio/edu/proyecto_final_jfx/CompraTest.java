@@ -23,6 +23,9 @@ class CompraTest {
     private Evento  evento;
     private IEntrada entrada;
 
+    /**
+     * se encarga de realizar las compras, verificarla, confirmarla, cancelarla
+     */
     @BeforeEach
     void setUp() {
         usuario = new Usuario("Test", 1, "t@t.com", 123L, "test", "1234");
@@ -38,6 +41,9 @@ class CompraTest {
         entrada = new EntradaBase("Asiento A1", 50000);
     }
 
+    /**
+     * este test se encraga de realizar la compra exitosa
+     */
     @Test
     void builder_creaCompraCorrectamente() {
         Compra compra = new Compra.Builder()
@@ -51,24 +57,36 @@ class CompraTest {
         assertEquals(50000.0, compra.getTotal(), 0.01);
     }
 
+    /**
+     * este test se encraga de mencionar que no se puede realizar la compra por el usuario fallido
+     */
     @Test
     void builder_fallaSinUsuario() {
         assertThrows(IllegalStateException.class, () ->
                 new Compra.Builder().conEvento(evento).conEntrada(entrada).build());
     }
 
+    /**
+     * este test se encraga de mencionar que no se puede realizar la compra por que no se encuentra el evento
+     */
     @Test
     void builder_fallaSinEvento() {
         assertThrows(IllegalStateException.class, () ->
                 new Compra.Builder().conUsuario(usuario).conEntrada(entrada).build());
     }
 
+    /**
+     * este test se encraga de informar que la compra fue fallida ya que no hay estradas disponibles
+     */
     @Test
     void builder_fallaSinEntradas() {
         assertThrows(IllegalStateException.class, () ->
                 new Compra.Builder().conUsuario(usuario).conEvento(evento).build());
     }
 
+    /**
+     * este test se encraga de realizar la compra exitosa
+     */
     @Test
     void cancelar_exitoso() {
         Compra compra = new Compra.Builder()
@@ -77,6 +95,9 @@ class CompraTest {
         assertEquals(EstadoCompra.CANCELADA, compra.getEstado());
     }
 
+    /**
+     * este test se encarga de cancelar el registro ya que no se encuentra la compra confirmada
+     */
     @Test
     void cancelar_fallaSiConfirmada() {
         Compra compra = new Compra.Builder()
@@ -85,6 +106,9 @@ class CompraTest {
         assertFalse(compra.cancelar());
     }
 
+    /**
+     * este test se encarga de calcular la el pago a realizar de la compra exitosa
+     */
     @Test
     void getTotal_calculaCorrectamente() {
         Compra compra = new Compra.Builder()
