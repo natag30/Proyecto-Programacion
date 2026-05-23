@@ -31,6 +31,12 @@ public class UsuarioController {
         return true;
     }
 
+    /**
+     * se encarga de ingresar el usuario con contraseña para poder acceder si el usuario y contraseña es corecto
+     * @param identificador identificar el usuario correcto
+     * @param contrasena identificar contraseña correcta
+     * @return
+     */
     public boolean loginUsuario(String identificador, String contrasena) {
         Usuario usuario = plataforma.buscarUsuarioPorCredenciales(identificador, contrasena);
         if (usuario == null) return false;
