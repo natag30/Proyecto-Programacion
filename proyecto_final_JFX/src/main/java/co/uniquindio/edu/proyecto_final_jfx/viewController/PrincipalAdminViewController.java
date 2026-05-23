@@ -18,7 +18,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.*;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -41,8 +40,8 @@ public class PrincipalAdminViewController {
     @FXML private Button     btnIncidencias;
     @FXML private Button     btnMetricas;
 
-    private Launcher launcher;
-    private Stage    stage;
+    private Launcher     launcher;
+    private Stage        stage;
     private List<Button> navBtns;
 
     public void setLauncher(Launcher l) { this.launcher = l; }
@@ -53,7 +52,6 @@ public class PrincipalAdminViewController {
         navBtns = Arrays.asList(
             btnEventos, btnAgregarEvento, btnUsuarios,
             btnCompras, btnIncidencias, btnMetricas);
-
         lblBienvenida.setText("Bienvenido, " +
             SesionActual.getInstancia().getUsuarioActual().getNombre());
         onVerEventos();
@@ -74,16 +72,38 @@ public class PrincipalAdminViewController {
         AnchorPane.setBottomAnchor(nodo, 0.0);
     }
 
+    private HBox crearCabecera(String titulo, String subtitulo, Node... acciones) {
+        VBox tituloBox = new VBox(2);
+        Label lTitulo = new Label(titulo);
+        lTitulo.setStyle(Estilos.SECTION_TITLE);
+        tituloBox.getChildren().add(lTitulo);
+        if (subtitulo != null && !subtitulo.isBlank()) {
+            Label lSub = new Label(subtitulo);
+            lSub.setStyle(Estilos.SECTION_SUB);
+            tituloBox.getChildren().add(lSub);
+        }
+        HBox cabecera = new HBox();
+        cabecera.setAlignment(Pos.CENTER_LEFT);
+        cabecera.getChildren().add(tituloBox);
+        if (acciones.length > 0) {
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+            cabecera.getChildren().add(spacer);
+            cabecera.getChildren().addAll(acciones);
+        }
+        return cabecera;
+    }
+
     // ── Eventos ─────────────────────────────────────────────────────
 
     @FXML
     public void onVerEventos() {
         resaltarBoton(btnEventos);
 
-        long activos    = Launcher.eventos.stream().filter(e -> e.getEstado() == EstadoEvento.PUBLICADO).count();
-        long vendidas   = Launcher.compras.stream().mapToLong(c -> c.getEntradas().size()).sum();
+        long activos     = Launcher.eventos.stream().filter(e -> e.getEstado() == EstadoEvento.PUBLICADO).count();
+        long vendidas    = Launcher.compras.stream().mapToLong(c -> c.getEntradas().size()).sum();
         int  disponibles = Launcher.eventos.stream().mapToInt(Evento::getAforoDisponible).sum();
-        long cancelados = Launcher.eventos.stream().filter(e -> e.getEstado() == EstadoEvento.CANCELADO).count();
+        long cancelados  = Launcher.eventos.stream().filter(e -> e.getEstado() == EstadoEvento.CANCELADO).count();
 
         ScrollPane scroll = new ScrollPane();
         scroll.setFitToWidth(true);
@@ -92,32 +112,20 @@ public class PrincipalAdminViewController {
         VBox root = new VBox(14);
         root.setStyle("-fx-padding: 16; -fx-background-color: #f5f5f5;");
 
-        // Cabecera
-        HBox cabecera = new HBox();
-        cabecera.setAlignment(Pos.CENTER_LEFT);
-        VBox tituloBox = new VBox(2);
-        Label titulo = new Label("Gestion de eventos");
-        titulo.setStyle(Estilos.LABEL_TITULO);
-        Label sub = new Label(Launcher.eventos.size() + " evento(s) registrado(s)");
-        sub.setStyle(Estilos.LABEL_SUB);
-        tituloBox.getChildren().addAll(titulo, sub);
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
         Button btnNuevo = new Button("Nuevo evento");
-        btnNuevo.setStyle(Estilos.BTN_PRIMARIO_ADMIN);
+        btnNuevo.setStyle(Estilos.BTN_PRIMARY_GREEN);
         btnNuevo.setOnAction(e -> onAgregarEvento());
-        cabecera.getChildren().addAll(tituloBox, spacer, btnNuevo);
+        HBox cabecera = crearCabecera("Gestión de eventos",
+            Launcher.eventos.size() + " evento(s) registrado(s)", btnNuevo);
 
-        // Stats
         HBox statsBox = new HBox(10);
         statsBox.getChildren().addAll(
-            crearStat("ACTIVOS",     String.valueOf(activos)),
-            crearStat("VENDIDAS",    String.valueOf(vendidas)),
-            crearStat("DISPONIBLES", String.valueOf(disponibles)),
-            crearStat("CANCELADOS",  String.valueOf(cancelados))
+            crearStatCard("ACTIVOS",     String.valueOf(activos)),
+            crearStatCard("VENDIDAS",    String.valueOf(vendidas)),
+            crearStatCard("DISPONIBLES", String.valueOf(disponibles)),
+            crearStatCard("CANCELADOS",  String.valueOf(cancelados))
         );
 
-        // Tabla
         TableView<Evento> tabla = new TableView<>();
         tabla.setStyle("-fx-background-color: #ffffff; -fx-border-color: #e0e0e0;" +
                        "-fx-border-radius: 8; -fx-background-radius: 8;");
@@ -156,16 +164,13 @@ public class PrincipalAdminViewController {
         TableColumn<Evento, Void> colAcc = new TableColumn<>("ACCIONES");
         colAcc.setPrefWidth(160);
         colAcc.setCellFactory(col -> new TableCell<>() {
-            final Button btnEditar  = new Button("Editar");
-            final Button btnEstado  = new Button("Estado");
-            final HBox   hbox       = new HBox(6, btnEditar, btnEstado);
+            final Button btnEditar = new Button("Editar");
+            final Button btnEstado = new Button("Estado");
+            final HBox   hbox      = new HBox(6, btnEditar, btnEstado);
             {
-                btnEditar.setStyle(Estilos.BTN_SECUNDARIO);
-                btnEstado.setStyle(Estilos.BTN_SECUNDARIO);
-                btnEditar.setOnAction(e -> {
-                    Evento ev = getTableView().getItems().get(getIndex());
-                    onEditarEvento(ev);
-                });
+                btnEditar.setStyle(Estilos.BTN_SECONDARY);
+                btnEstado.setStyle(Estilos.BTN_SECONDARY);
+                btnEditar.setOnAction(e -> onEditarEvento(getTableView().getItems().get(getIndex())));
                 btnEstado.setOnAction(e -> {
                     Evento ev = getTableView().getItems().get(getIndex());
                     if (ev.getEstado() == EstadoEvento.PUBLICADO) ev.pausar();
@@ -187,28 +192,28 @@ public class PrincipalAdminViewController {
         setContenido(scroll);
     }
 
-    private VBox crearStat(String etiqueta, String valor) {
+    private VBox crearStatCard(String etiqueta, String valor) {
         VBox card = new VBox(4);
         card.setStyle(Estilos.STAT_CARD);
         HBox.setHgrow(card, Priority.ALWAYS);
         Label lbl = new Label(etiqueta);
-        lbl.setStyle(Estilos.LABEL_HINT);
+        lbl.setStyle(Estilos.STAT_LABEL);
         Label val = new Label(valor);
-        val.setStyle("-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #111111;");
+        val.setStyle(Estilos.STAT_VALUE);
         card.getChildren().addAll(lbl, val);
         return card;
     }
 
     private String badgeEvento(EstadoEvento estado) {
         return switch (estado) {
-            case PUBLICADO  -> Estilos.BADGE_VERDE;
-            case BORRADOR   -> Estilos.BADGE_AMBER;
-            case CANCELADO  -> Estilos.BADGE_ROJO;
-            default         -> Estilos.BADGE_GRIS;
+            case PUBLICADO -> Estilos.BADGE_GREEN;
+            case BORRADOR  -> Estilos.BADGE_AMBER;
+            case CANCELADO -> Estilos.BADGE_RED;
+            default        -> Estilos.BADGE_GRAY;
         };
     }
 
-    // ── Agregar Evento ───────────────────────────────────────────────
+    // ── Agregar / Editar Evento ──────────────────────────────────────
 
     @FXML
     public void onAgregarEvento() {
@@ -231,8 +236,8 @@ public class PrincipalAdminViewController {
         VBox root = new VBox(16);
         root.setStyle("-fx-padding: 16; -fx-background-color: #f5f5f5;");
 
-        Label titulo = new Label(editar ? "Editar evento" : "Crear nuevo evento");
-        titulo.setStyle(Estilos.LABEL_TITULO);
+        HBox cabecera = crearCabecera(
+            editar ? "Editar evento" : "Crear nuevo evento", null);
 
         VBox form = new VBox(12);
         form.setStyle(Estilos.CARD);
@@ -251,14 +256,14 @@ public class PrincipalAdminViewController {
         cbCat.getItems().addAll(Categoria.values());
         cbCat.setPromptText("Categoría");
         cbCat.setMaxWidth(Double.MAX_VALUE);
-        cbCat.setStyle(Estilos.CAMPO_TEXTO);
-        DatePicker dpFecha    = new DatePicker();
+        cbCat.setStyle(Estilos.INPUT_STYLE);
+        DatePicker dpFecha = new DatePicker();
         dpFecha.setPromptText("Fecha");
         dpFecha.setMaxWidth(Double.MAX_VALUE);
-        dpFecha.setStyle(Estilos.CAMPO_TEXTO);
-        TextField tfHora      = campo("HH:MM (ej. 20:00)");
-        TextArea  taDesc      = new TextArea();
-        taDesc.setStyle(Estilos.CAMPO_TEXTO);
+        dpFecha.setStyle(Estilos.INPUT_STYLE);
+        TextField tfHora  = campo("HH:MM (ej. 20:00)");
+        TextArea  taDesc  = new TextArea();
+        taDesc.setStyle(Estilos.INPUT_STYLE);
         taDesc.setPromptText("Descripción del evento");
         taDesc.setPrefRowCount(3);
         TextField tfRecinto   = campo("Nombre del recinto");
@@ -277,20 +282,20 @@ public class PrincipalAdminViewController {
             tfDireccion.setText(eventoEditar.getRecinto().getDireccion());
         }
 
-        addFila(grid, "Nombre:",     tfNombre,    0);
-        addFila(grid, "Ciudad:",     tfCiudad,    1);
-        addFila(grid, "Categoría:",  cbCat,       2);
-        addFila(grid, "Fecha:",      dpFecha,     3);
-        addFila(grid, "Hora:",       tfHora,      4);
-        addFila(grid, "Descripción:",taDesc,      5);
-        addFila(grid, "Recinto:",    tfRecinto,   6);
-        addFila(grid, "Dirección:",  tfDireccion, 7);
+        addFila(grid, "Nombre:",      tfNombre,    0);
+        addFila(grid, "Ciudad:",      tfCiudad,    1);
+        addFila(grid, "Categoría:",   cbCat,       2);
+        addFila(grid, "Fecha:",       dpFecha,     3);
+        addFila(grid, "Hora:",        tfHora,      4);
+        addFila(grid, "Descripción:", taDesc,      5);
+        addFila(grid, "Recinto:",     tfRecinto,   6);
+        addFila(grid, "Dirección:",   tfDireccion, 7);
 
-        Label lblMsg = new Label();
+        Label lblMsg   = new Label();
         Button btnGuardar  = new Button(editar ? "Actualizar" : "Guardar evento");
-        btnGuardar.setStyle(Estilos.BTN_PRIMARIO_ADMIN);
+        btnGuardar.setStyle(Estilos.BTN_PRIMARY_GREEN);
         Button btnCancelar = new Button("Cancelar");
-        btnCancelar.setStyle(Estilos.BTN_SECUNDARIO);
+        btnCancelar.setStyle(Estilos.BTN_SECONDARY);
         btnCancelar.setOnAction(e -> onVerEventos());
 
         btnGuardar.setOnAction(e -> {
@@ -324,7 +329,7 @@ public class PrincipalAdminViewController {
                 String dirR = tfDireccion.getText().isBlank() ? "Sin dirección" : tfDireccion.getText().trim();
                 Recinto recinto = new Recinto(nomR, dirR, ciudad);
                 Zona general = new Zona("General", 30, 50000);
-                for (String f : new String[]{"A","B","C"})
+                for (String f : new String[]{"A", "B", "C"})
                     for (int j = 1; j <= 10; j++)
                         general.agregarAsiento(new Asiento(f, j, general));
                 recinto.agregarZona(general);
@@ -337,12 +342,13 @@ public class PrincipalAdminViewController {
                 Launcher.eventos.add(nuevo);
                 lblMsg.setText("Evento '" + nombre + "' creado.");
                 lblMsg.setStyle("-fx-text-fill: #0F6E56; -fx-font-size: 12px;");
+                onAgregarEvento();
             }
         });
 
         HBox botones = new HBox(8, btnGuardar, btnCancelar);
         form.getChildren().addAll(grid, botones, lblMsg);
-        root.getChildren().addAll(titulo, form);
+        root.getChildren().addAll(cabecera, form);
         scroll.setContent(root);
         setContenido(scroll);
     }
@@ -350,7 +356,7 @@ public class PrincipalAdminViewController {
     private TextField campo(String prompt) {
         TextField tf = new TextField();
         tf.setPromptText(prompt);
-        tf.setStyle(Estilos.CAMPO_TEXTO);
+        tf.setStyle(Estilos.INPUT_STYLE);
         return tf;
     }
 
@@ -372,8 +378,8 @@ public class PrincipalAdminViewController {
         VBox root = new VBox(14);
         root.setStyle("-fx-padding: 16; -fx-background-color: #f5f5f5;");
 
-        Label titulo = new Label("Usuarios registrados");
-        titulo.setStyle(Estilos.LABEL_TITULO);
+        HBox cabecera = crearCabecera("Usuarios registrados",
+            Launcher.usuarios.size() + " usuario(s) registrado(s)");
 
         TableView<Usuario> tabla = new TableView<>();
         tabla.setStyle("-fx-background-color: #ffffff; -fx-border-color: #e0e0e0;");
@@ -394,7 +400,7 @@ public class PrincipalAdminViewController {
         tabla.getColumns().addAll(colNombre, colCorreo, colRol);
         tabla.setItems(FXCollections.observableArrayList(Launcher.usuarios));
 
-        root.getChildren().addAll(titulo, tabla);
+        root.getChildren().addAll(cabecera, tabla);
         setContenido(root);
     }
 
@@ -407,8 +413,8 @@ public class PrincipalAdminViewController {
         VBox root = new VBox(14);
         root.setStyle("-fx-padding: 16; -fx-background-color: #f5f5f5;");
 
-        Label titulo = new Label("Compras realizadas");
-        titulo.setStyle(Estilos.LABEL_TITULO);
+        HBox cabecera = crearCabecera("Compras realizadas",
+            Launcher.compras.size() + " compra(s) en total");
 
         TableView<Compra> tabla = new TableView<>();
         tabla.setStyle("-fx-background-color: #ffffff; -fx-border-color: #e0e0e0;");
@@ -452,7 +458,7 @@ public class PrincipalAdminViewController {
         colAcc.setPrefWidth(100);
         colAcc.setCellFactory(col -> new TableCell<>() {
             final Button btnCancelar = new Button("Cancelar");
-            { btnCancelar.setStyle(Estilos.BTN_SECUNDARIO); }
+            { btnCancelar.setStyle(Estilos.BTN_SECONDARY); }
             @Override protected void updateItem(Void v, boolean empty) {
                 super.updateItem(v, empty);
                 if (empty) { setGraphic(null); return; }
@@ -473,16 +479,16 @@ public class PrincipalAdminViewController {
         tabla.getColumns().addAll(colId, colUser, colEvento, colFecha, colTotal, colEstado, colAcc);
         tabla.setItems(FXCollections.observableArrayList(Launcher.compras));
 
-        root.getChildren().addAll(titulo, tabla);
+        root.getChildren().addAll(cabecera, tabla);
         setContenido(root);
     }
 
     private String badgeCompra(EstadoCompra estado) {
         return switch (estado) {
-            case PAGADA, CONFIRMADA -> Estilos.BADGE_VERDE;
+            case PAGADA, CONFIRMADA -> Estilos.BADGE_GREEN;
             case CREADA             -> Estilos.BADGE_AMBER;
-            case CANCELADA          -> Estilos.BADGE_ROJO;
-            default                 -> Estilos.BADGE_GRIS;
+            case CANCELADA          -> Estilos.BADGE_RED;
+            default                 -> Estilos.BADGE_GRAY;
         };
     }
 
@@ -494,18 +500,17 @@ public class PrincipalAdminViewController {
 
         VBox root = new VBox(14);
         root.setStyle("-fx-padding: 16; -fx-background-color: #f5f5f5;");
-        root.setAlignment(Pos.CENTER);
 
-        Label titulo = new Label("Incidencias");
-        titulo.setStyle(Estilos.LABEL_TITULO);
+        HBox cabecera = crearCabecera("Incidencias", "Historial de incidencias del sistema");
+
         Label msg = new Label("No hay incidencias registradas.");
-        msg.setStyle(Estilos.LABEL_SUB);
+        msg.setStyle(Estilos.SECTION_SUB);
 
-        root.getChildren().addAll(titulo, msg);
+        root.getChildren().addAll(cabecera, msg);
         setContenido(root);
     }
 
-    // ── Metricas ─────────────────────────────────────────────────────
+    // ── Métricas ─────────────────────────────────────────────────────
 
     @FXML
     public void onVerMetricas() {
@@ -523,19 +528,17 @@ public class PrincipalAdminViewController {
         VBox root = new VBox(16);
         root.setStyle("-fx-padding: 16; -fx-background-color: #f5f5f5;");
 
-        Label titulo = new Label("Metricas del sistema");
-        titulo.setStyle(Estilos.LABEL_TITULO);
+        HBox cabecera = crearCabecera("Métricas del sistema", "Resumen de actividad");
 
         HBox cards = new HBox(10);
         cards.getChildren().addAll(
-            crearStat("TOTAL EVENTOS",     String.valueOf(Launcher.eventos.size())),
-            crearStat("PUBLICADOS",        String.valueOf(publicados)),
-            crearStat("CANCELADOS",        String.valueOf(cancelados)),
-            crearStat("USUARIOS",          String.valueOf(Launcher.usuarios.size())),
-            crearStat("COMPRAS",           String.valueOf(Launcher.compras.size()))
+            crearStatCard("TOTAL EVENTOS", String.valueOf(Launcher.eventos.size())),
+            crearStatCard("PUBLICADOS",    String.valueOf(publicados)),
+            crearStatCard("CANCELADOS",    String.valueOf(cancelados)),
+            crearStatCard("USUARIOS",      String.valueOf(Launcher.usuarios.size())),
+            crearStatCard("COMPRAS",       String.valueOf(Launcher.compras.size()))
         );
 
-        // BarChart: Compras por Estado
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Estado");
         NumberAxis yAxis = new NumberAxis();
@@ -548,29 +551,25 @@ public class PrincipalAdminViewController {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Compras");
         for (EstadoCompra estado : EstadoCompra.values()) {
-            long count = Launcher.compras.stream()
-                .filter(c -> c.getEstado() == estado).count();
+            long count = Launcher.compras.stream().filter(c -> c.getEstado() == estado).count();
             series.getData().add(new XYChart.Data<>(estado.toString(), count));
         }
         barChart.getData().add(series);
 
-        // PieChart: Distribución por categoría
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
         for (Categoria cat : Categoria.values()) {
-            long count = Launcher.eventos.stream()
-                .filter(e -> e.getCategoria() == cat).count();
+            long count = Launcher.eventos.stream().filter(e -> e.getCategoria() == cat).count();
             if (count > 0) pieData.add(new PieChart.Data(cat.toString(), count));
         }
         PieChart pieChart = new PieChart(pieData);
-        pieChart.setTitle("Distribucion de eventos por categoria");
+        pieChart.setTitle("Distribución por categoría");
         pieChart.setPrefWidth(340);
         pieChart.setPrefHeight(240);
 
         HBox chartsBox = new HBox(20, barChart, pieChart);
 
-        // Botones de exportar
         Button btnCSV = new Button("Exportar CSV");
-        btnCSV.setStyle(Estilos.BTN_PRIMARIO_ADMIN);
+        btnCSV.setStyle(Estilos.BTN_PRIMARY_GREEN);
         btnCSV.setOnAction(e -> {
             GeneradorReportes.exportarComprasCSV(Launcher.compras, "reporte_compras.csv");
             GeneradorReportes.exportarOcupacionCSV(Launcher.eventos, "reporte_ocupacion.csv");
@@ -580,7 +579,7 @@ public class PrincipalAdminViewController {
         });
 
         Button btnPDF = new Button("Exportar PDF");
-        btnPDF.setStyle(Estilos.BTN_PRIMARIO_ADMIN);
+        btnPDF.setStyle(Estilos.BTN_PRIMARY_GREEN);
         btnPDF.setOnAction(e -> {
             GeneradorReportes.exportarComprasPDF(Launcher.compras, "reporte_compras.pdf");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -590,12 +589,12 @@ public class PrincipalAdminViewController {
 
         HBox botonesExport = new HBox(10, btnCSV, btnPDF);
 
-        root.getChildren().addAll(titulo, cards, chartsBox, botonesExport);
+        root.getChildren().addAll(cabecera, cards, chartsBox, botonesExport);
         scroll.setContent(root);
         setContenido(scroll);
     }
 
-    // ── Sesion ───────────────────────────────────────────────────────
+    // ── Sesión ───────────────────────────────────────────────────────
 
     @FXML
     public void onCerrarSesion() {
