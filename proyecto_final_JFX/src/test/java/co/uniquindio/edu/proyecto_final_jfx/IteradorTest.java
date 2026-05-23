@@ -31,6 +31,9 @@ class IteradorTest {
         return new Evento(nombre, cat, ciudad, fecha, r);
     }
 
+    /**
+     * este test es el encargado de generar la lista de eventos
+     */
     @BeforeEach
     void setUp() {
         lista = new ArrayList<>();
@@ -43,6 +46,9 @@ class IteradorTest {
 
     // ── IteradorCategoria ──────────────────────────────────────────────
 
+    /**
+     * este test es el encargado de filtrar solo los conciertos
+     */
     @Test
     void filtra_soloConciertos() {
         IIteradorEventos it = new IteradorCategoria(lista, Categoria.CONCIERTO);
@@ -51,6 +57,9 @@ class IteradorTest {
         assertEquals(2, count);
     }
 
+    /**
+     * este test es el encargado de no realizar los filtros y observar todos los eventos
+     */
     @Test
     void filtra_sinFiltro_retornaTodos() {
         IIteradorEventos it = new IteradorCategoria(lista, null);
@@ -59,6 +68,9 @@ class IteradorTest {
         assertEquals(4, count);
     }
 
+    /**
+     * este test se encarga de no ubicar la lista vacia
+     */
     @Test
     void hasNext_falseListaVacia() {
         IIteradorEventos it = new IteradorCategoria(new ArrayList<>(), null);
@@ -67,6 +79,9 @@ class IteradorTest {
 
     // ── IteradorCiudad ─────────────────────────────────────────────────
 
+    /**
+     * este test es el encargado de filtrar solo las ciudades
+     */
     @Test
     void filtra_soloArmenia() {
         IIteradorEventos it = new IteradorCiudad(lista, "Armenia");
@@ -75,6 +90,9 @@ class IteradorTest {
         assertEquals(2, count);
     }
 
+    /**
+     * este test es el encargado de ubicar la ciudad del evento
+     */
     @Test
     void filtra_ciudadInexistente() {
         IIteradorEventos it = new IteradorCiudad(lista, "Bogota");
@@ -83,6 +101,9 @@ class IteradorTest {
 
     // ── IteradorFecha ──────────────────────────────────────────────────
 
+    /**
+     * este test es el encargado de filtrar las fechas
+     */
     @Test
     void filtra_rangoQueIncluye2() {
         LocalDate desde = LocalDate.now().plusDays(1);
@@ -93,6 +114,9 @@ class IteradorTest {
         assertEquals(2, count);
     }
 
+    /**
+     * este test es el encargado de filtrar las fechas que estan aignadas los fechas de compras de los eventos
+     */
     @Test
     void filtra_rangoVacio() {
         LocalDate desde = LocalDate.of(2020, 1, 1);

@@ -25,6 +25,11 @@ class GeneradorReportesTest {
     private List<Compra>  compras;
     private List<Evento>  eventos;
 
+
+    /**
+     * este test es el encargado de realizar todas las compras, separacion de asiento, de lugar.
+     */
+
     @BeforeEach
     void setUp() {
         Usuario u = new Usuario("Tester", 1, "t@t.com", 123L, "test", "1234");
@@ -50,6 +55,10 @@ class GeneradorReportesTest {
         eventos.add(e);
     }
 
+    /**
+     * este test es el encargado de generar el reporte de la compra exitosa
+     * @throws Exception
+     */
     @Test
     void exportarCSV_creaArchivo() throws Exception {
         String ruta = Files.createTempFile("test_compras", ".csv").toString();
@@ -59,6 +68,10 @@ class GeneradorReportesTest {
         assertTrue(f.length() > 0);
     }
 
+    /**
+     * este test es el encargado de generar el reporte de la compra exitosa
+     * @throws Exception
+     */
     @Test
     void exportarCSV_contieneEncabezado() throws Exception {
         String ruta = Files.createTempFile("test_header", ".csv").toString();
@@ -67,6 +80,10 @@ class GeneradorReportesTest {
         assertTrue(contenido.contains("ID"));
     }
 
+    /**
+     * este test es el encargado de generar el pdf de la compra exitosa
+     * @throws Exception
+     */
     @Test
     void exportarPDF_creaArchivo() throws Exception {
         String ruta = Files.createTempFile("test_compras", ".pdf").toString();
@@ -76,6 +93,10 @@ class GeneradorReportesTest {
         assertTrue(f.length() > 0);
     }
 
+    /**
+     * este test es el encargado de generar el reporte de ocupacion exitosa sin errores
+     * @throws Exception
+     */
     @Test
     void exportarOcupacionCSV_creaArchivo() throws Exception {
         String ruta = Files.createTempFile("test_ocupacion", ".csv").toString();

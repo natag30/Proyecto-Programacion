@@ -78,6 +78,9 @@ class EventoTest {
         assertEquals(EstadoEvento.CANCELADO, evento.getEstado());
     }
 
+    /**
+     * este test es para realizar cancelacion si llega a cancelarce el evento
+     */
     @Test
     void cancelar_fallaSiFinalizado() {
         evento.publicar();
@@ -85,6 +88,9 @@ class EventoTest {
         assertFalse(evento.cancelar());
     }
 
+    /**
+     * este test es el encargado de realizar la finalizacion exitosa del evento
+     */
     @Test
     void finalizar_exitoso() {
         evento.publicar();
@@ -92,6 +98,9 @@ class EventoTest {
         assertEquals(EstadoEvento.FINALIZADO, evento.getEstado());
     }
 
+    /**
+     * este test es el encargado de reservar el lugar del evento
+     */
     @Test
     void reservarLugar_reduceAforo() {
         evento.publicar();
@@ -100,11 +109,17 @@ class EventoTest {
         assertEquals(aforoAntes - 1, evento.getAforoDisponible());
     }
 
+    /**
+     * este test es el encargado de buscar la disponibilidad
+     */
     @Test
     void hayDisponibilidad_true() {
         assertTrue(evento.hayDisponibilidad());
     }
 
+    /**
+     * este test es el encargado de notificar al usuario
+     */
     @Test
     void notificar_llamaObservador() {
         AtomicInteger contador = new AtomicInteger(0);
