@@ -61,13 +61,16 @@ class EventoTest {
     }
 
     /**
-     *
+     *este test se encarga de realizar el pauso fallido del evento ya que no se encuentra publicado
      */
     @Test
     void pausar_fallaSiBorrador() {
         assertFalse(evento.pausar());
     }
 
+    /**
+     * este test se encarga de realizar la cancelacion exitoso del evento
+     */
     @Test
     void cancelar_exitoso() {
         evento.publicar();
