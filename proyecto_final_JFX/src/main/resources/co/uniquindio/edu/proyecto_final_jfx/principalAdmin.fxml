@@ -43,8 +43,8 @@
                      -fx-padding: 14 8 14 8;">
             <Label text="GESTION"
                    style="-fx-font-size: 10px; -fx-font-weight: bold;
-                          -fx-text-fill: #888888; -fx-padding: 0 0 0 8;
-                          -fx-font-family: Arial;"/>
+                          -fx-text-fill: #9ca3af; -fx-padding: 16 12 4 12;
+                          -fx-background-color: transparent; -fx-font-family: Arial;"/>
             <Button fx:id="btnEventos" text="Eventos"
                     onAction="#onVerEventos" maxWidth="Infinity"
                     style="-fx-background-color: #E1F5EE; -fx-text-fill: #085041;
@@ -78,8 +78,8 @@
                            -fx-cursor: hand; -fx-font-family: Arial;"/>
             <Label text="ANALISIS"
                    style="-fx-font-size: 10px; -fx-font-weight: bold;
-                          -fx-text-fill: #888888; -fx-padding: 10 0 0 8;
-                          -fx-font-family: Arial;"/>
+                          -fx-text-fill: #9ca3af; -fx-padding: 16 12 4 12;
+                          -fx-background-color: transparent; -fx-font-family: Arial;"/>
             <Button fx:id="btnMetricas" text="Metricas"
                     onAction="#onVerMetricas" maxWidth="Infinity"
                     style="-fx-background-color: transparent; -fx-text-fill: #555555;

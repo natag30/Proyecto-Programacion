@@ -1,40 +1,29 @@
 package co.uniquindio.edu.proyecto_final_jfx.model.patrones.estructurales.decorator;
 
-public class EntradaBase implements IEntrada{
-    private String description;
-    private double precio;
+import co.uniquindio.edu.proyecto_final_jfx.model.evento.Asiento;
 
-    /**
-     * Crea una entrada base con su descripción y precio inicial.
-     *
-     * @param descripcion texto que describe la entrada
-     * @param precio      precio base de la entrada
-     */
+public class EntradaBase implements IEntrada {
+    private String  description;
+    private double  precio;
+    private Asiento asiento;
+
     public EntradaBase(String descripcion, double precio) {
         this.description = descripcion;
-        this.precio = precio;
+        this.precio      = precio;
+        this.asiento     = null;
     }
 
-    /**
-     * Retorna la descripción de la entrada.
-     *
-     * @return texto descriptivo de la entrada
-     */
+    public EntradaBase(String descripcion, double precio, Asiento asiento) {
+        this.description = descripcion;
+        this.precio      = precio;
+        this.asiento     = asiento;
+    }
+
     @Override
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description; }
 
-    /**
-     * Retorna el precio base de la entrada.
-     *
-     * @return precio de la entrada
-     */
     @Override
-    public double getPrecio() {
-        return precio;
-    }
+    public double getPrecio() { return precio; }
 
-
-
+    public Asiento getAsiento() { return asiento; }
 }

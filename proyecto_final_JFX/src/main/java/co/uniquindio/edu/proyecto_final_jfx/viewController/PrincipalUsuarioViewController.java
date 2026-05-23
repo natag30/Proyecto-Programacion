@@ -48,20 +48,18 @@ public class PrincipalUsuarioViewController {
     @FXML private Button     btnMisCompras;
     @FXML private Button     btnPerfil;
 
-    private Launcher launcher;
-    private Stage    stage;
+    private Launcher     launcher;
+    private Stage        stage;
     private List<Button> navBtns;
 
-    // Estado de la vista de compra
-    private Evento                eventoActual         = null;
-    private final List<Asiento>   asientosSeleccionados = new ArrayList<>();
-    private final Map<Asiento, Button> botonesAsiento  = new HashMap<>();
-    private TableView<Evento>     tablaEventos;
+    private Evento                    eventoActual          = null;
+    private final List<Asiento>       asientosSeleccionados = new ArrayList<>();
+    private final Map<Asiento, Button> botonesAsiento       = new HashMap<>();
+    private TableView<Evento>         tablaEventos;
 
-    // Referencias al panel derecho (resumen)
-    private VBox           vboxLineas;
-    private Label          lblTotal;
-    private Label          lblMsgCompra;
+    private VBox             vboxLineas;
+    private Label            lblTotal;
+    private Label            lblMsgCompra;
     private ComboBox<String> cbMetodo;
 
     public void setLauncher(Launcher l) { this.launcher = l; }
@@ -103,45 +101,45 @@ public class PrincipalUsuarioViewController {
         VBox root = new VBox(14);
         root.setStyle("-fx-padding: 16; -fx-background-color: #f5f5f5;");
 
+        VBox tituloBox = new VBox(2);
         Label titulo = new Label("Explorar Eventos");
-        titulo.setStyle(Estilos.LABEL_TITULO);
-        Label sub = new Label("Armenia, Quindio");
-        sub.setStyle(Estilos.LABEL_SUB);
+        titulo.setStyle(Estilos.SECTION_TITLE);
+        Label sub = new Label("Armenia, Quindío");
+        sub.setStyle(Estilos.SECTION_SUB);
+        tituloBox.getChildren().addAll(titulo, sub);
 
-        // Filtros
         TextField txtBuscar = new TextField();
         txtBuscar.setPromptText("Buscar evento...");
-        txtBuscar.setStyle(Estilos.CAMPO_TEXTO);
+        txtBuscar.setStyle(Estilos.INPUT_STYLE);
         txtBuscar.setPrefWidth(200);
 
         ComboBox<String> cbCategoria = new ComboBox<>();
         cbCategoria.getItems().add("Todas");
         for (Categoria c : Categoria.values()) cbCategoria.getItems().add(c.toString());
         cbCategoria.setValue("Todas");
-        cbCategoria.setStyle(Estilos.CAMPO_TEXTO);
+        cbCategoria.setStyle(Estilos.INPUT_STYLE);
 
         TextField txtCiudadFiltro = new TextField();
         txtCiudadFiltro.setPromptText("Ciudad...");
-        txtCiudadFiltro.setStyle(Estilos.CAMPO_TEXTO);
+        txtCiudadFiltro.setStyle(Estilos.INPUT_STYLE);
         txtCiudadFiltro.setPrefWidth(120);
 
         DatePicker dpDesde = new DatePicker();
         dpDesde.setPromptText("Desde");
-        dpDesde.setStyle(Estilos.CAMPO_TEXTO);
+        dpDesde.setStyle(Estilos.INPUT_STYLE);
         dpDesde.setPrefWidth(140);
 
         DatePicker dpHasta = new DatePicker();
         dpHasta.setPromptText("Hasta");
-        dpHasta.setStyle(Estilos.CAMPO_TEXTO);
+        dpHasta.setStyle(Estilos.INPUT_STYLE);
         dpHasta.setPrefWidth(140);
 
         Button btnBuscar = new Button("Buscar");
-        btnBuscar.setStyle(Estilos.BTN_PRIMARIO_USER);
+        btnBuscar.setStyle(Estilos.BTN_PRIMARY_BLUE);
 
         HBox filtros = new HBox(8, txtBuscar, cbCategoria, txtCiudadFiltro, dpDesde, dpHasta, btnBuscar);
         filtros.setAlignment(Pos.CENTER_LEFT);
 
-        // Tabla
         tablaEventos = new TableView<>();
         tablaEventos.setStyle("-fx-background-color: #ffffff; -fx-border-color: #e0e0e0;");
         VBox.setVgrow(tablaEventos, Priority.ALWAYS);
@@ -175,7 +173,7 @@ public class PrincipalUsuarioViewController {
         tablaEventos.setItems(FXCollections.observableArrayList(Launcher.eventos));
 
         Button btnComprarDesde = new Button("Comprar entrada");
-        btnComprarDesde.setStyle(Estilos.BTN_PRIMARIO_USER);
+        btnComprarDesde.setStyle(Estilos.BTN_PRIMARY_BLUE);
         btnComprarDesde.disableProperty().bind(
             tablaEventos.getSelectionModel().selectedItemProperty().isNull());
         btnComprarDesde.setOnAction(e -> {
@@ -183,11 +181,9 @@ public class PrincipalUsuarioViewController {
             onComprarEntradas();
         });
 
-        // Acción buscar
         btnBuscar.setOnAction(e -> {
             List<Evento> base = new ArrayList<>(Launcher.eventos);
 
-            // Filtro por categoría
             if (!cbCategoria.getValue().equals("Todas")) {
                 Categoria catSel = Categoria.valueOf(cbCategoria.getValue());
                 IIteradorEventos it = new IteradorCategoria(base, catSel);
@@ -196,7 +192,6 @@ public class PrincipalUsuarioViewController {
                 base = res;
             }
 
-            // Filtro por ciudad
             if (!txtCiudadFiltro.getText().isBlank()) {
                 IIteradorEventos it = new IteradorCiudad(base, txtCiudadFiltro.getText().trim());
                 List<Evento> res = new ArrayList<>();
@@ -204,7 +199,6 @@ public class PrincipalUsuarioViewController {
                 base = res;
             }
 
-            // Filtro por fecha
             if (dpDesde.getValue() != null && dpHasta.getValue() != null) {
                 IIteradorEventos it = new IteradorFecha(base, dpDesde.getValue(), dpHasta.getValue());
                 List<Evento> res = new ArrayList<>();
@@ -212,20 +206,18 @@ public class PrincipalUsuarioViewController {
                 base = res;
             }
 
-            // Filtro por nombre (contains)
             if (!txtBuscar.getText().isBlank()) {
                 String term = txtBuscar.getText().trim().toLowerCase();
                 List<Evento> res = new ArrayList<>();
-                for (Evento ev : base) {
+                for (Evento ev : base)
                     if (ev.getNombre().toLowerCase().contains(term)) res.add(ev);
-                }
                 base = res;
             }
 
             tablaEventos.setItems(FXCollections.observableArrayList(base));
         });
 
-        root.getChildren().addAll(titulo, sub, filtros, tablaEventos, btnComprarDesde);
+        root.getChildren().addAll(tituloBox, filtros, tablaEventos, btnComprarDesde);
         scroll.setContent(root);
         setContenido(scroll);
     }
@@ -248,14 +240,14 @@ public class PrincipalUsuarioViewController {
         root.setAlignment(Pos.TOP_LEFT);
 
         Label titulo = new Label("Comprar Entradas");
-        titulo.setStyle(Estilos.LABEL_TITULO);
+        titulo.setStyle(Estilos.SECTION_TITLE);
         Label sub = new Label("Selecciona un evento para ver el mapa de asientos");
-        sub.setStyle(Estilos.LABEL_SUB);
+        sub.setStyle(Estilos.SECTION_SUB);
 
         ComboBox<Evento> cbEvento = new ComboBox<>();
         cbEvento.getItems().addAll(Launcher.eventos);
         cbEvento.setPromptText("Elige un evento...");
-        cbEvento.setStyle(Estilos.CAMPO_TEXTO);
+        cbEvento.setStyle(Estilos.INPUT_STYLE);
         cbEvento.setPrefWidth(380);
         cbEvento.setCellFactory(lv -> new ListCell<>() {
             @Override protected void updateItem(Evento ev, boolean empty) {
@@ -271,7 +263,7 @@ public class PrincipalUsuarioViewController {
         });
 
         Button btnVer = new Button("Ver asientos");
-        btnVer.setStyle(Estilos.BTN_PRIMARIO_USER);
+        btnVer.setStyle(Estilos.BTN_PRIMARY_BLUE);
         btnVer.setOnAction(e -> {
             if (cbEvento.getValue() == null) return;
             eventoActual = cbEvento.getValue();
@@ -288,7 +280,6 @@ public class PrincipalUsuarioViewController {
         asientosSeleccionados.clear();
         botonesAsiento.clear();
 
-        // Panel resumen (derecha)
         vboxLineas   = new VBox(6);
         lblTotal     = new Label("$0");
         lblMsgCompra = new Label();
@@ -299,21 +290,20 @@ public class PrincipalUsuarioViewController {
 
         cbMetodo.getItems().addAll("Tarjeta", "PSE");
         cbMetodo.setPromptText("Método de pago");
-        cbMetodo.setStyle(Estilos.CAMPO_TEXTO);
+        cbMetodo.setStyle(Estilos.INPUT_STYLE);
         cbMetodo.setMaxWidth(Double.MAX_VALUE);
 
         Button btnConfirmar = new Button("Confirmar compra");
-        btnConfirmar.setStyle(Estilos.BTN_PRIMARIO_USER);
+        btnConfirmar.setStyle(Estilos.BTN_PRIMARY_BLUE);
         btnConfirmar.setMaxWidth(Double.MAX_VALUE);
         btnConfirmar.setOnAction(e -> onConfirmarCompra());
 
-        // Info del evento
         VBox infoEvento = new VBox(4);
         infoEvento.setStyle("-fx-background-color: #f5f5f5; -fx-background-radius: 6; -fx-padding: 8 10 8 10;");
         Label lNombreEv = new Label(eventoActual.getNombre());
         lNombreEv.setStyle("-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #111111;");
         Label lFechaEv = new Label(eventoActual.getFechaHora().toLocalDate() + " — " + eventoActual.getCiudad());
-        lFechaEv.setStyle(Estilos.LABEL_SUB);
+        lFechaEv.setStyle(Estilos.SECTION_SUB);
         infoEvento.getChildren().addAll(lNombreEv, lFechaEv);
 
         Label lblResumen = new Label("Resumen del pedido");
@@ -342,12 +332,10 @@ public class PrincipalUsuarioViewController {
         panelDerecho.setPrefWidth(220);
         panelDerecho.setMaxWidth(220);
 
-        // Panel izquierdo — mapa de asientos
         Label lEscenario = new Label("  ESCENARIO  ");
         lEscenario.setStyle("-fx-background-color: #e0e0e0; -fx-padding: 4;" +
             "-fx-background-radius: 4; -fx-font-size: 11px; -fx-text-fill: #555555;");
 
-        // Leyenda
         Label legDisp = crearLeyenda("#9FE1CB", "Disponible");
         Label legVip  = crearLeyenda("#FAC775", "VIP");
         Label legOcup = crearLeyenda("#e0e0e0", "Ocupado");
@@ -355,7 +343,6 @@ public class PrincipalUsuarioViewController {
         HBox leyenda  = new HBox(14, legDisp, legVip, legOcup, legSel);
         leyenda.setAlignment(Pos.CENTER_LEFT);
 
-        // Grid de asientos por zona
         VBox gridContainer = new VBox(12);
         for (Zona zona : eventoActual.getRecinto().getZonas()) {
             Label lblZona = new Label(zona.getNombre() + " — $" + (int) zona.getPrecioBase() + " c/u");
@@ -364,22 +351,24 @@ public class PrincipalUsuarioViewController {
             boolean esVip = zona.getPrecioBase() > 80000;
             final String estiloDisp = esVip
                 ? "-fx-background-color: #FAC775; -fx-text-fill: #633806; " +
-                  "-fx-background-radius: 4; -fx-font-size: 10px; -fx-cursor: hand; -fx-pref-width: 34; -fx-pref-height: 30;"
+                  "-fx-background-radius: 4; -fx-font-size: 10px; -fx-cursor: hand;" +
+                  "-fx-pref-width: 34; -fx-pref-height: 30;"
                 : "-fx-background-color: #9FE1CB; -fx-text-fill: #085041; " +
-                  "-fx-background-radius: 4; -fx-font-size: 10px; -fx-cursor: hand; -fx-pref-width: 34; -fx-pref-height: 30;";
+                  "-fx-background-radius: 4; -fx-font-size: 10px; -fx-cursor: hand;" +
+                  "-fx-pref-width: 34; -fx-pref-height: 30;";
             final String estiloOcup =
                 "-fx-background-color: #e0e0e0; -fx-text-fill: #888888; " +
-                "-fx-background-radius: 4; -fx-font-size: 10px; -fx-pref-width: 34; -fx-pref-height: 30;";
+                "-fx-background-radius: 4; -fx-font-size: 10px;" +
+                "-fx-pref-width: 34; -fx-pref-height: 30;";
             final String estiloSel =
                 "-fx-background-color: #0F6E56; -fx-text-fill: #ffffff; -fx-font-weight: bold; " +
-                "-fx-background-radius: 4; -fx-font-size: 10px; -fx-cursor: hand; -fx-pref-width: 34; -fx-pref-height: 30;";
+                "-fx-background-radius: 4; -fx-font-size: 10px; -fx-cursor: hand;" +
+                "-fx-pref-width: 34; -fx-pref-height: 30;";
 
             Map<String, Integer> filaMap = new LinkedHashMap<>();
             int rowIdx = 0;
-            for (Asiento a : zona.getAsientos()) {
-                if (!filaMap.containsKey(a.getFila()))
-                    filaMap.put(a.getFila(), rowIdx++);
-            }
+            for (Asiento a : zona.getAsientos())
+                if (!filaMap.containsKey(a.getFila())) filaMap.put(a.getFila(), rowIdx++);
 
             GridPane gridZona = new GridPane();
             gridZona.setHgap(4); gridZona.setVgap(4);
@@ -440,7 +429,7 @@ public class PrincipalUsuarioViewController {
         vboxLineas.getChildren().clear();
         double total = 0;
         for (Asiento a : asientosSeleccionados) {
-            Label desc   = new Label("Fila " + a.getFila() + " N°" + a.getNumero()
+            Label desc = new Label("Fila " + a.getFila() + " N°" + a.getNumero()
                 + " (" + a.getZona().getNombre() + ")");
             desc.setStyle(Estilos.LABEL_CAMPO);
             desc.setWrapText(true);
@@ -484,7 +473,8 @@ public class PrincipalUsuarioViewController {
             a.ocupar();
             IEntrada entrada = new EntradaBase(
                 "Fila " + a.getFila() + " N°" + a.getNumero(),
-                a.getZona().getPrecioBase());
+                a.getZona().getPrecioBase(),
+                a);
             builder.conEntrada(entrada);
             Button b = botonesAsiento.get(a);
             if (b != null) {
@@ -516,17 +506,16 @@ public class PrincipalUsuarioViewController {
         root.setStyle("-fx-padding: 16; -fx-background-color: #f5f5f5;");
 
         Label titulo = new Label("Mis Compras");
-        titulo.setStyle(Estilos.LABEL_TITULO);
+        titulo.setStyle(Estilos.SECTION_TITLE);
 
         List<Compra> misCompras = new ArrayList<>();
-        for (Compra c : Launcher.compras) {
+        for (Compra c : Launcher.compras)
             if (c.getUsuario() == SesionActual.getInstancia().getUsuarioActual())
                 misCompras.add(c);
-        }
 
         if (misCompras.isEmpty()) {
             Label msg = new Label("Aún no has realizado ninguna compra.");
-            msg.setStyle(Estilos.LABEL_SUB);
+            msg.setStyle(Estilos.SECTION_SUB);
             root.getChildren().addAll(titulo, msg);
             setContenido(root);
             return;
@@ -574,16 +563,23 @@ public class PrincipalUsuarioViewController {
         colAcc.setPrefWidth(90);
         colAcc.setCellFactory(col -> new TableCell<>() {
             final Button btnCancelar = new Button("Cancelar");
-            { btnCancelar.setStyle(Estilos.BTN_SECUNDARIO); }
+            { btnCancelar.setStyle(Estilos.BTN_SECONDARY); }
             @Override protected void updateItem(Void v, boolean empty) {
                 super.updateItem(v, empty);
                 if (empty) { setGraphic(null); return; }
                 Compra c = getTableView().getItems().get(getIndex());
                 if (c.getEstado() == EstadoCompra.CREADA) {
                     btnCancelar.setOnAction(e -> {
-                        c.cancelar();
-                        PersistenciaCompras.guardarCompras(Launcher.compras);
-                        getTableView().refresh();
+                        if (c.cancelar()) {
+                            for (IEntrada ie : c.getEntradas()) {
+                                if (ie instanceof EntradaBase eb && eb.getAsiento() != null)
+                                    eb.getAsiento().liberar();
+                            }
+                            for (int i = 0; i < c.getEntradas().size(); i++)
+                                c.getEvento().liberarLugar();
+                            PersistenciaCompras.guardarCompras(Launcher.compras);
+                            getTableView().refresh();
+                        }
                     });
                     setGraphic(btnCancelar);
                 } else {
@@ -601,10 +597,10 @@ public class PrincipalUsuarioViewController {
 
     private String badgeCompra(EstadoCompra estado) {
         return switch (estado) {
-            case PAGADA, CONFIRMADA -> Estilos.BADGE_VERDE;
+            case PAGADA, CONFIRMADA -> Estilos.BADGE_GREEN;
             case CREADA             -> Estilos.BADGE_AMBER;
-            case CANCELADA          -> Estilos.BADGE_ROJO;
-            default                 -> Estilos.BADGE_GRIS;
+            case CANCELADA          -> Estilos.BADGE_RED;
+            default                 -> Estilos.BADGE_GRAY;
         };
     }
 
@@ -618,7 +614,7 @@ public class PrincipalUsuarioViewController {
         root.setStyle("-fx-padding: 16; -fx-background-color: #f5f5f5;");
 
         Label titulo = new Label("Mi Perfil");
-        titulo.setStyle(Estilos.LABEL_TITULO);
+        titulo.setStyle(Estilos.SECTION_TITLE);
 
         var u = SesionActual.getInstancia().getUsuarioActual();
 
@@ -646,7 +642,7 @@ public class PrincipalUsuarioViewController {
         return hb;
     }
 
-    // ── Cerrar Sesion ────────────────────────────────────────────────
+    // ── Cerrar Sesión ────────────────────────────────────────────────
 
     @FXML
     public void onCerrarSesion() {
