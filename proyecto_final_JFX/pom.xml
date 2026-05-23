@@ -36,7 +36,22 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>  </dependencies>
+    </dependency>
+
+    <!-- Apache POI para exportar CSV/Excel -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>5.3.0</version>
+    </dependency>
+
+    <!-- Apache PDFBox para exportar PDF -->
+    <dependency>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>pdfbox</artifactId>
+      <version>3.0.3</version>
+    </dependency>
+  </dependencies>
 
   <build>
     <plugins>
@@ -49,6 +64,18 @@
           <target>25</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <argLine>
+            --add-opens co.uniquindio.edu.proyecto_final_jfx/co.uniquindio.edu.proyecto_final_jfx.model.patrones.creacionales.singleton=ALL-UNNAMED
+            --add-opens co.uniquindio.edu.proyecto_final_jfx/co.uniquindio.edu.proyecto_final_jfx.model.compra=ALL-UNNAMED
+          </argLine>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>

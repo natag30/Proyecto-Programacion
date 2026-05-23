@@ -130,6 +130,8 @@ public class Compra {
      */
     public Evento getEvento()                     { return evento; }
 
+    public void setEstado(EstadoCompra estado)    { this.estado = estado; }
+
     @Override
     public String toString() {
         return "Compra{idCompra=" + idCompra +

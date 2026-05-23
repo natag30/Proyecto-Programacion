@@ -1,6 +1,7 @@
 package co.uniquindio.edu.proyecto_final_jfx.viewController;
 
 import co.uniquindio.edu.proyecto_final_jfx.Launcher;
+import co.uniquindio.edu.proyecto_final_jfx.controller.GeneradorReportes;
 import co.uniquindio.edu.proyecto_final_jfx.controller.PersistenciaCompras;
 import co.uniquindio.edu.proyecto_final_jfx.model.compra.Compra;
 import co.uniquindio.edu.proyecto_final_jfx.model.enums.Categoria;
@@ -14,6 +15,8 @@ import co.uniquindio.edu.proyecto_final_jfx.model.usuario.SesionActual;
 import co.uniquindio.edu.proyecto_final_jfx.model.usuario.Usuario;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -532,7 +535,62 @@ public class PrincipalAdminViewController {
             crearStat("COMPRAS",           String.valueOf(Launcher.compras.size()))
         );
 
-        root.getChildren().addAll(titulo, cards);
+        // BarChart: Compras por Estado
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Estado");
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Cantidad");
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Compras por Estado");
+        barChart.setPrefWidth(420);
+        barChart.setPrefHeight(240);
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Compras");
+        for (EstadoCompra estado : EstadoCompra.values()) {
+            long count = Launcher.compras.stream()
+                .filter(c -> c.getEstado() == estado).count();
+            series.getData().add(new XYChart.Data<>(estado.toString(), count));
+        }
+        barChart.getData().add(series);
+
+        // PieChart: Distribución por categoría
+        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+        for (Categoria cat : Categoria.values()) {
+            long count = Launcher.eventos.stream()
+                .filter(e -> e.getCategoria() == cat).count();
+            if (count > 0) pieData.add(new PieChart.Data(cat.toString(), count));
+        }
+        PieChart pieChart = new PieChart(pieData);
+        pieChart.setTitle("Distribucion de eventos por categoria");
+        pieChart.setPrefWidth(340);
+        pieChart.setPrefHeight(240);
+
+        HBox chartsBox = new HBox(20, barChart, pieChart);
+
+        // Botones de exportar
+        Button btnCSV = new Button("Exportar CSV");
+        btnCSV.setStyle(Estilos.BTN_PRIMARIO_ADMIN);
+        btnCSV.setOnAction(e -> {
+            GeneradorReportes.exportarComprasCSV(Launcher.compras, "reporte_compras.csv");
+            GeneradorReportes.exportarOcupacionCSV(Launcher.eventos, "reporte_ocupacion.csv");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("CSV exportado correctamente");
+            alert.show();
+        });
+
+        Button btnPDF = new Button("Exportar PDF");
+        btnPDF.setStyle(Estilos.BTN_PRIMARIO_ADMIN);
+        btnPDF.setOnAction(e -> {
+            GeneradorReportes.exportarComprasPDF(Launcher.compras, "reporte_compras.pdf");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("PDF exportado correctamente");
+            alert.show();
+        });
+
+        HBox botonesExport = new HBox(10, btnCSV, btnPDF);
+
+        root.getChildren().addAll(titulo, cards, chartsBox, botonesExport);
         scroll.setContent(root);
         setContenido(scroll);
     }
