@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1e402d9-d12a-40eb-b1da-65987be15b19" name="Changes" comment="" />
     <list default="true" id="f1e402d9-d12a-40eb-b1da-65987be15b19" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/ConciertoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/ConciertoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/ConferenciaFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/ConferenciaFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/EventoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/EventoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/TeatroFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/factory/TeatroFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/singleton/PlataformaEventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/model/patrones/creacionales/singleton/PlataformaEventos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/controller/CompraController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/controller/EventoController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/controller/UsuarioController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/viewController/PrincipalAdminViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/proyecto_final_jfx/viewController/PrincipalAdminViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/viewController/LoginViewController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/viewController/PrincipalAdminViewController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proyecto_final_JFX/src/main/java/co/uniquindio/edu/viewController/PrincipalUsuarioViewController.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +22,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="70" />
+    <option name="cachedIndexableFilesCount" value="217" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -125,33 +129,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ide.FileNotInSourceRootChecker.no.check": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "Diana",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/U/SEGUNDO SEMESTRE/Programación II/RepositorioProyecto/Proyecto-Programacion",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
@@ -179,13 +156,40 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  &lt;component name=&quot;PropertiesComponent&quot;&gt;{
+  &amp;quot;keyToString&amp;quot;: {
+    &amp;quot;ModuleVcsDetector.initialDetectionPerformed&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;RunOnceActivity.MCP Project settings loaded&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;RunOnceActivity.ShowReadmeOnStart&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;RunOnceActivity.git.unshallow&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;RunOnceActivity.typescript.service.memoryLimit.init&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;codeWithMe.voiceChat.enabledByDefault&amp;quot;: &amp;quot;false&amp;quot;,
+    &amp;quot;com.intellij.ide.FileNotInSourceRootChecker.no.check&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;git-widget-placeholder&amp;quot;: &amp;quot;Diana&amp;quot;,
+    &amp;quot;ignore.virus.scanning.warn.message&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;junie.onboarding.icon.badge.shown&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;kotlin-language-version-configured&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;last_opened_file_path&amp;quot;: &amp;quot;C:/U/SEGUNDO SEMESTRE/Programación II/RepositorioProyecto/Proyecto-Programacion&amp;quot;,
+    &amp;quot;node.js.detected.package.eslint&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;node.js.detected.package.tslint&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;node.js.selected.package.eslint&amp;quot;: &amp;quot;(autodetect)&amp;quot;,
+    &amp;quot;node.js.selected.package.tslint&amp;quot;: &amp;quot;(autodetect)&amp;quot;,
+    &amp;quot;nodejs_package_manager_path&amp;quot;: &amp;quot;npm&amp;quot;,
+    &amp;quot;project.structure.last.edited&amp;quot;: &amp;quot;Project&amp;quot;,
+    &amp;quot;project.structure.proportion&amp;quot;: &amp;quot;0.15&amp;quot;,
+    &amp;quot;project.structure.side.proportion&amp;quot;: &amp;quot;0.2&amp;quot;,
+    &amp;quot;settings.editor.selected.configurable&amp;quot;: &amp;quot;preferences.pluginManager&amp;quot;,
+    &amp;quot;to.speed.mode.migration.done&amp;quot;: &amp;quot;true&amp;quot;,
+    &amp;quot;vue.rearranger.settings.migration&amp;quot;: &amp;quot;true&amp;quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.24374.151" />
-        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.24374.151" />
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.31033.145" />
       </set>
     </attachedChunks>
   </component>
@@ -209,6 +213,7 @@
       <workItem from="1779073385820" duration="196000" />
       <workItem from="1779073610864" duration="72000" />
       <workItem from="1779073769104" duration="1981000" />
+      <workItem from="1779643534412" duration="656000" />
     </task>
     <servers />
   </component>

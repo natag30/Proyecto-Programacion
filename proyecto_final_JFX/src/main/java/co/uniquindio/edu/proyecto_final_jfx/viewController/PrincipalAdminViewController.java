@@ -4,6 +4,8 @@ import co.uniquindio.edu.proyecto_final_jfx.Launcher;
 import co.uniquindio.edu.proyecto_final_jfx.controller.GeneradorReportes;
 import co.uniquindio.edu.proyecto_final_jfx.controller.PersistenciaCompras;
 import co.uniquindio.edu.proyecto_final_jfx.model.compra.Compra;
+import co.uniquindio.edu.proyecto_final_jfx.model.patrones.estructurales.decorator.EntradaBase;
+import co.uniquindio.edu.proyecto_final_jfx.model.patrones.estructurales.decorator.IEntrada;
 import co.uniquindio.edu.proyecto_final_jfx.model.enums.Categoria;
 import co.uniquindio.edu.proyecto_final_jfx.model.enums.EstadoCompra;
 import co.uniquindio.edu.proyecto_final_jfx.model.enums.EstadoEvento;
@@ -465,9 +467,18 @@ public class PrincipalAdminViewController {
                 Compra c = getTableView().getItems().get(getIndex());
                 if (c.getEstado() == EstadoCompra.CREADA) {
                     btnCancelar.setOnAction(e -> {
-                        c.cancelar();
-                        PersistenciaCompras.guardarCompras(Launcher.compras);
-                        getTableView().refresh();
+                        if (c.cancelar()) {
+                            for (IEntrada ie : c.getEntradas()) {
+                                if (ie instanceof EntradaBase eb) {
+                                    eb.getAsiento().liberar();
+                                }
+                            }
+                            for (int i = 0; i < c.getEntradas().size(); i++) {
+                                c.getEvento().liberarLugar();
+                            }
+                            PersistenciaCompras.guardarCompras(Launcher.compras);
+                            getTableView().refresh();
+                        }
                     });
                     setGraphic(btnCancelar);
                 } else {

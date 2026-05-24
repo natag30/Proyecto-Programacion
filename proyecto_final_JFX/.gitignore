@@ -37,3 +37,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Archivos generados en tiempo de ejecución
+compras.txt
+reporte_compras.pdf
+reporte_compras.csv
+reporte_ocupacion.csv
